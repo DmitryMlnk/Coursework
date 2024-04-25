@@ -1,0 +1,15 @@
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/CMakeFiles/World_of_FCSaN.dir
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glfw/CMakeFiles/edit_cache.dir
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glfw/CMakeFiles/rebuild_cache.dir
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glfw/src/CMakeFiles/glfw.dir
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glfw/src/CMakeFiles/edit_cache.dir
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glfw/src/CMakeFiles/rebuild_cache.dir
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glad/CMakeFiles/glad.dir
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glad/CMakeFiles/edit_cache.dir
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glad/CMakeFiles/rebuild_cache.dir
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glm/CMakeFiles/edit_cache.dir
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glm/CMakeFiles/rebuild_cache.dir
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glm/glm/CMakeFiles/edit_cache.dir
+/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glm/glm/CMakeFiles/rebuild_cache.dir
