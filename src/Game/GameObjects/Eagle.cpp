@@ -23,7 +23,7 @@ void Eagle::render() const
 
 void Eagle::update(const double delta)
 {
-    std::cout << "current eagle state " << m_isActive << std::endl;
+
 }
 
 void Eagle::explosion() {

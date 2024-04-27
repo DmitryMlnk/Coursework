@@ -165,14 +165,14 @@ void Level::initLevel() {
     switch (m_eGameMode) {
         case Game::EGameMode::TwoPlayers:
             m_pTank2 = std::make_shared<Tank>(
-                    Tank::ETankType::Player2Green_type1, false, true,
+                    Tank::ETankType::Player2Green_type4, false, true,
                     Tank::EOrientation::Top, 0.05, getPlayerRespawn_2(),
                     glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f);
             Physics::PhysicsEngine::addDynamicGameObject(m_pTank2);
             [[fallthrough]];
         case Game::EGameMode::OnePlayer:
             m_pTank1 = std::make_shared<Tank>(
-                    Tank::ETankType::Player1Yellow_type1, false, true,
+                    Tank::ETankType::Player1Yellow_type4, false, true,
                     Tank::EOrientation::Top, 0.05, getPlayerRespawn_1(),
                     glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f);
             Physics::PhysicsEngine::addDynamicGameObject(m_pTank1);
@@ -183,15 +183,15 @@ void Level::initLevel() {
     }
 
     m_enemyTanks.emplace(std::make_shared<Tank>(
-            Tank::ETankType::EnemyWhite_type1, true, false,
+            Tank::ETankType::EnemyRed_type4, true, false,
             Tank::EOrientation::Bottom, 0.05, getEnemyRespawn_1(),
             glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
     m_enemyTanks.emplace(std::make_shared<Tank>(
-            Tank::ETankType::EnemyWhite_type4, true, false,
+            Tank::ETankType::EnemyRed_type4, true, false,
             Tank::EOrientation::Bottom, 0.05, getEnemyRespawn_2(),
             glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
     m_enemyTanks.emplace(std::make_shared<Tank>(
-            Tank::ETankType::EnemyWhite_type2, true, false,
+            Tank::ETankType::EnemyRed_type2, true, false,
             Tank::EOrientation::Bottom, 0.05, getEnemyRespawn_3(),
             glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
     for (const auto &currentTank: m_enemyTanks) {

@@ -84,7 +84,6 @@ namespace Physics {
                 }
             }
         }
-
         updatePositions(m_dynamicObjects);
     }
 

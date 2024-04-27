@@ -49,8 +49,6 @@ Tank::Tank(const Tank::ETankType eType, const bool bHasAI,
           m_eTankType(eType),
           m_bShieldOnSpawn(bShieldOnSpawn) {
     setOrientation(m_eOrientation);
-    checkTankType();
-
     m_respawnTimer.setCallback([&]() {
         m_isSpawning = false;
         if (m_pAIComponent) {
@@ -79,31 +77,9 @@ Tank::Tank(const Tank::ETankType eType, const bool bHasAI,
         m_spriteBigExplosionBottomLeft.reset();
     });
 
-    if (m_eTankType == ETankType::EnemyRed_type4) {
-        m_hasMoreHP = true;
-        m_isRed = true;
-    } else if (m_eTankType == ETankType::EnemyRed_type3
-               or m_eTankType == ETankType::EnemyRed_type2
-               or m_eTankType == ETankType::EnemyRed_type1) {
-        m_isRed = true;
-        m_hasMoreHP = false;
-    } else if (m_eTankType == ETankType::EnemyGreen_type4) {
-        m_isGreen = true;
-        m_hasMoreHP = true;
-    } else if (m_eTankType == ETankType::EnemyGreen_type3
-               or m_eTankType == ETankType::EnemyGreen_type2
-               or m_eTankType == ETankType::EnemyGreen_type1) {
-        m_isGreen = true;
-        m_hasMoreHP = false;
-    } else if (m_eTankType == ETankType::EnemyWhite_type4) {
-        m_isWhite = true;
-        m_hasMoreHP = true;
-    } else if (m_eTankType == ETankType::EnemyWhite_type3
-               or m_eTankType == ETankType::EnemyWhite_type2
-               or m_eTankType == ETankType::EnemyWhite_type1) {
-        m_isWhite = true;
-        m_hasMoreHP = false;
-    }
+    updateTankLogic();
+    tankLogic();
+    loadTankType();
 
     m_isActive = true;
 
@@ -198,10 +174,12 @@ void Tank::update(const double delta) {
     m_pCurrentBullet->update(delta);
 
     if (m_isSpawning) {
+        m_velocity = 0;
         m_spriteAnimator_respawn.update(delta);
         m_respawnTimer.update(delta);
     } else if (m_isActive) {
         if (m_pAIComponent) {
+            m_velocity = m_maxVelocity;
             m_pAIComponent->update(delta);
         }
 
@@ -231,36 +209,8 @@ void Tank::update(const double delta) {
     }
 }
 
-void Tank::checkTankType() {
-    if (m_isRed and m_hasMoreHP) {
-        loadTankType(m_eTankType);
-        std::cout << "Red More HP" << std::endl;
-        m_hasMoreHP = false;
-    } else if (m_isRed) {
-        loadTankType(m_eTankType);
-        std::cout << "Red low HP" << std::endl;
-        m_isRed = false;
-        m_isGreen = true;
-        m_hasMoreHP = true;
-    } else if (m_isGreen and m_hasMoreHP) {
-        std::cout << "Green More HP" << std::endl;
-        loadTankType(m_eTankType);
-        m_hasMoreHP = false;
-    } else if (m_isGreen) {
-        loadTankType(m_eTankType);
-        std::cout << "Green low HP" << std::endl;
-        m_isGreen = false;
-        m_isWhite = true;
-        m_hasMoreHP = true;
-    } else if (m_isWhite and m_hasMoreHP) {
-        loadTankType(m_eTankType);
-        std::cout << "White More HP" << std::endl;
-        m_hasMoreHP = false;
-    } else if (m_isWhite) {
-        loadTankType(m_eTankType);
-        std::cout << "White low HP" << std::endl;
-        m_isWhite = false;
-    } else {
+void Tank::tankLogic() {
+    if (m_HP < 1){
         std::cout << "Fatal hp" << std::endl;
         m_isActive = false;
         m_isExplosion = true;
@@ -269,23 +219,187 @@ void Tank::checkTankType() {
     }
 }
 
-void Tank::loadTankType(Tank::ETankType &tankType) {
-    m_pSprite_top = ResourceManager::getSprite(getTankSpriteFromType(tankType) + "_top");
-    m_pSprite_bottom = ResourceManager::getSprite(getTankSpriteFromType(tankType) + "_bottom");
-    m_pSprite_left = ResourceManager::getSprite(getTankSpriteFromType(tankType) + "_left");
-    m_pSprite_right = ResourceManager::getSprite(getTankSpriteFromType(tankType) + "_right");
-    m_spriteAnimator_top.reset();
-    m_spriteAnimator_bottom.reset();
-    m_spriteAnimator_left.reset();
-    m_spriteAnimator_left.reset();
-    m_spriteAnimator_top = m_pSprite_top;
-    m_spriteAnimator_bottom = m_pSprite_bottom;
-    m_spriteAnimator_left = m_pSprite_left;
-    m_spriteAnimator_right = m_pSprite_right;
+void Tank::updateTankLogic() {
+    switch (m_eTankType) {
+        case ETankType::Player1Yellow_type1:
+            m_HP = 1;
+            m_maxVelocity = 0.06;
+            break;
+        case ETankType::Player1Yellow_type2:
+            m_HP = 2;
+            m_maxVelocity = 0.05;
+            break;
+        case ETankType::Player1Yellow_type3:
+            m_HP = 3;
+            m_maxVelocity = 0.04;
+            break;
+        case ETankType::Player1Yellow_type4:
+            m_HP = 4;
+            m_maxVelocity = 0.02;
+            break;
+        case ETankType::Player2Green_type1:
+            m_HP = 1;
+            m_maxVelocity = 0.06;
+            break;
+        case ETankType::Player2Green_type2:
+            m_HP = 2;
+            m_maxVelocity = 0.05;
+            break;
+        case ETankType::Player2Green_type3:
+            m_HP = 3;
+            m_maxVelocity = 0.04;
+            break;
+        case ETankType::Player2Green_type4:
+            m_HP = 4;
+            m_maxVelocity = 0.02;
+            break;
+        case ETankType::EnemyWhite_type1:
+            m_HP = 1;
+            m_maxVelocity = 0.06;
+            break;
+        case ETankType::EnemyWhite_type2:
+            m_HP = 1;
+            m_maxVelocity = 0.12;
+            break;
+        case ETankType::EnemyWhite_type3:
+            m_HP = 2;
+            m_maxVelocity = 0.04;
+            break;
+        case ETankType::EnemyWhite_type4:
+            m_HP = 3;
+            m_maxVelocity = 0.02;
+            break;
+        case ETankType::EnemyGreen_type1:
+            m_HP = 1;
+            m_maxVelocity = 0.06;
+            break;
+        case ETankType::EnemyGreen_type2:
+            m_HP = 2;
+            m_maxVelocity = 0.12;
+            break;
+        case ETankType::EnemyGreen_type3:
+            m_HP = 2;
+            m_maxVelocity = 0.04;
+            break;
+        case ETankType::EnemyGreen_type4:
+            m_HP = 3;
+            m_maxVelocity = 0.02;
+            break;
+        case ETankType::EnemyRed_type1:
+            m_HP = 1;
+            m_maxVelocity = 0.06;
+            break;
+        case ETankType::EnemyRed_type2:
+            m_HP = 3;
+            m_maxVelocity = 0.12;
+            break;
+        case ETankType::EnemyRed_type3:
+            m_HP = 2;
+            m_maxVelocity = 0.04;
+            break;
+        case ETankType::EnemyRed_type4:
+            m_HP = 3;
+            m_maxVelocity = 0.02;
+            break;
+        case ETankType::destroy:
+            m_HP = 0;
+            m_maxVelocity = 0;
+    }
+}
+
+void Tank::updateTackType() {
+    switch (m_eTankType) {
+        case ETankType::Player1Yellow_type1:
+            m_eTankType = ETankType::destroy;
+            break;
+        case ETankType::Player1Yellow_type2:
+            m_eTankType = ETankType::Player1Yellow_type1;
+            break;
+        case ETankType::Player1Yellow_type3:
+            m_eTankType = ETankType::Player1Yellow_type2;
+            break;
+        case ETankType::Player1Yellow_type4:
+            m_eTankType = ETankType::Player1Yellow_type3;
+            break;
+        case ETankType::Player2Green_type1:
+            m_eTankType = ETankType::destroy;
+            break;
+        case ETankType::Player2Green_type2:
+            m_eTankType = ETankType::Player2Green_type1;
+            break;
+        case ETankType::Player2Green_type3:
+            m_eTankType = ETankType::Player2Green_type2;
+            break;
+        case ETankType::Player2Green_type4:
+            m_eTankType = ETankType::Player2Green_type3;
+            break;
+        case ETankType::EnemyWhite_type1:
+            m_eTankType = ETankType::destroy;
+            break;
+        case ETankType::EnemyWhite_type2:
+            m_eTankType = ETankType::destroy;
+            break;
+        case ETankType::EnemyWhite_type3:
+            m_eTankType = ETankType::EnemyWhite_type1;
+            break;
+        case ETankType::EnemyWhite_type4:
+            m_eTankType = ETankType::EnemyWhite_type3;
+            break;
+        case ETankType::EnemyGreen_type1:
+            m_eTankType = ETankType::EnemyWhite_type4;
+            break;
+        case ETankType::EnemyGreen_type2:
+            m_eTankType = ETankType::EnemyWhite_type2;
+            break;
+        case ETankType::EnemyGreen_type3:
+            m_eTankType = ETankType::EnemyGreen_type1;
+            break;
+        case ETankType::EnemyGreen_type4:
+            m_eTankType = ETankType::EnemyGreen_type3;
+            break;
+        case ETankType::EnemyRed_type1:
+            m_eTankType = ETankType::EnemyGreen_type4;
+            break;
+        case ETankType::EnemyRed_type2:
+            m_eTankType = ETankType::EnemyGreen_type2;
+            break;
+        case ETankType::EnemyRed_type3:
+            m_eTankType = ETankType::EnemyRed_type1;
+            break;
+        case ETankType::EnemyRed_type4:
+            m_eTankType = ETankType::EnemyRed_type3;
+            break;
+        case ETankType::destroy:
+            break;
+    }
+}
+
+void Tank::loadTankType() {
+    if (m_eTankType != Tank::ETankType::destroy) {
+        m_pSprite_right.reset();
+        m_pSprite_left.reset();
+        m_pSprite_top.reset();
+        m_pSprite_bottom.reset();
+        m_pSprite_top = ResourceManager::getSprite(getTankSpriteFromType(m_eTankType) + "_top");
+        m_pSprite_bottom = ResourceManager::getSprite(getTankSpriteFromType(m_eTankType) + "_bottom");
+        m_pSprite_left = ResourceManager::getSprite(getTankSpriteFromType(m_eTankType) + "_left");
+        m_pSprite_right = ResourceManager::getSprite(getTankSpriteFromType(m_eTankType) + "_right");
+        m_spriteAnimator_top.reset();
+        m_spriteAnimator_bottom.reset();
+        m_spriteAnimator_left.reset();
+        m_spriteAnimator_left.reset();
+        m_spriteAnimator_top = m_pSprite_top;
+        m_spriteAnimator_bottom = m_pSprite_bottom;
+        m_spriteAnimator_left = m_pSprite_left;
+        m_spriteAnimator_right = m_pSprite_right;
+    }
 }
 
 void Tank::explosion() {
-    checkTankType();
+    updateTackType();
+    updateTankLogic();
+    tankLogic();
+    loadTankType();
 }
 
 void Tank::fire() {

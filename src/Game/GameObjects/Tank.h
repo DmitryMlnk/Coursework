@@ -41,7 +41,8 @@ public:
         EnemyRed_type1,
         EnemyRed_type2,
         EnemyRed_type3,
-        EnemyRed_type4
+        EnemyRed_type4,
+        destroy
     };
     enum class ETankExplosion {
         Top_right,
@@ -95,9 +96,13 @@ public:
 
 private:
 
-    void checkTankType();
+    void tankLogic();
 
-    void loadTankType(ETankType &tankType);
+    void updateTankLogic();
+
+    void updateTackType();
+
+    void loadTankType();
 
     EOrientation m_eOrientation;
     std::shared_ptr<Bullet> m_pCurrentBullet;
@@ -136,10 +141,11 @@ private:
     bool m_hasShield;
     bool m_bShieldOnSpawn;
 
+    int m_HP;
     bool m_isRed = false;
     bool m_isGreen = false;
     bool m_isWhite = false;
-    bool m_hasMoreHP = false;
+    bool m_isYellow = false;
 
     std::unique_ptr<TankAI> m_pAIComponent;
     ETankType m_eTankType;

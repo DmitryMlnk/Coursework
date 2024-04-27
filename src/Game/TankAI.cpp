@@ -40,6 +40,4 @@ void TankAI::setOrientation() {
         m_pParentTank->setOrientation(Tank::EOrientation::Right);
     }
 
-
-    m_pParentTank->setVelocity(0.05);
 }

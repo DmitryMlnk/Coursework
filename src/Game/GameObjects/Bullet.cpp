@@ -22,7 +22,7 @@ Bullet::Bullet(const double velocity, const glm::vec2 &position,
     auto onCollisionCallback = [&](const IGameObject &object, const Physics::ECollisionDirection) {
         setVelocity(0);
         m_isExplosion = true;
-        std::cout << "ON COLLISION CALLBACK BULLET" << std::endl;
+        std::cout << "DYNAMIC => STATIC OBJ" << std::endl;
         m_explosionTimer.start(m_spriteAnimator_explosion.getTotalDuration());
     };
     m_colliders.emplace_back(glm::vec2(0), m_size, onCollisionCallback);
@@ -31,7 +31,6 @@ Bullet::Bullet(const double velocity, const glm::vec2 &position,
         m_isExplosion = false;
         m_isActive = false;
         m_objectType = IGameObject::EObjectType::Bullet;
-        std::cout << "SET CALLBACK BULLET" << std::endl;
         m_spriteAnimator_explosion.reset();
     });
 }
