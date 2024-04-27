@@ -94,6 +94,8 @@ public:
 
     void fire();
 
+    void reborn();
+
 private:
 
     void tankLogic();
@@ -105,6 +107,7 @@ private:
     void loadTankType();
 
     EOrientation m_eOrientation;
+    glm::vec2 m_starPosition;
     std::shared_ptr<Bullet> m_pCurrentBullet;
 
     std::shared_ptr<RenderEngine::Sprite> m_pSprite_top;
@@ -142,13 +145,10 @@ private:
     bool m_bShieldOnSpawn;
 
     int m_HP;
-    bool m_isRed = false;
-    bool m_isGreen = false;
-    bool m_isWhite = false;
-    bool m_isYellow = false;
 
     std::unique_ptr<TankAI> m_pAIComponent;
     ETankType m_eTankType;
+    ETankType m_startETankType;
 
     static const std::string &getTankSpriteFromType(const ETankType eType);
     static const std::string &getTankSpriteFromExplosion(const ETankExplosion eExplosion);

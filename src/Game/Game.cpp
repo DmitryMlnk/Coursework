@@ -70,7 +70,7 @@ void Game::updateViewport() {
 }
 
 void Game::startNewLevel(const size_t level, const EGameMode eGameMode) {
-    m_currentLevelIndex = level;
+    m_currentLevelIndex = 1;
     auto pLevel = std::make_shared<Level>(ResourceManager::getLevels()[m_currentLevelIndex], eGameMode);
     m_pCurrentGameState = pLevel;
     Physics::PhysicsEngine::setCurrentLevel(pLevel);
@@ -104,6 +104,7 @@ void Game::setStartScreen() {
         m_currentLevelIndex = 0;
     });
     m_changeScreenTimer.start(1000);
+    setWindowSize(m_windowSize);
 }
 
 bool Game::init() {

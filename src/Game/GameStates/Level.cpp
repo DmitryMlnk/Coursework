@@ -124,9 +124,16 @@ Level::Level(const std::vector<std::string> &levelDescription,
                     m_enemyRespawn_3 = {currentLeftOffset, currentBottomOffset};
                     m_levelObjects.emplace_back(nullptr);
                     break;
+                case '2':
+                    std::cout << "Added Left brick pos: " << currentBottomOffset << " [] "<< currentLeftOffset << std::endl;
+                    m_levelObjects.emplace_back(createGameObjectFromDescription(
+                            currentElement, glm::vec2(currentLeftOffset, currentBottomOffset),
+                            glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
+                    break;
                 case 'E':
-                    std::cout << "Added eagle pos" << std::endl;
+                    std::cout << "Added eagle pos: " << currentBottomOffset << " [] "<< currentLeftOffset << std::endl;
                     m_eagleRespawn.emplace_back(currentLeftOffset, currentBottomOffset);
+                    m_levelObjects.emplace_back(nullptr);
                     break;
                 default:
                     m_levelObjects.emplace_back(createGameObjectFromDescription(
@@ -172,26 +179,26 @@ void Level::initLevel() {
             [[fallthrough]];
         case Game::EGameMode::OnePlayer:
             m_pTank1 = std::make_shared<Tank>(
-                    Tank::ETankType::Player1Yellow_type4, false, true,
+                    Tank::ETankType::EnemyRed_type2, false, true,
                     Tank::EOrientation::Top, 0.05, getPlayerRespawn_1(),
                     glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f);
             Physics::PhysicsEngine::addDynamicGameObject(m_pTank1);
     }
 
     for (const auto currentEaglePos : m_eagleRespawn){
-        m_eagle.emplace(std::make_shared<Eagle>(currentEaglePos, glm::vec2(BLOCK_SIZE, BLOCK_SIZE),0.f, 0.1f));
+        m_eagle.emplace(std::make_shared<Eagle>(currentEaglePos, glm::vec2(BLOCK_SIZE, BLOCK_SIZE),0.f, 0.f));
     }
 
     m_enemyTanks.emplace(std::make_shared<Tank>(
-            Tank::ETankType::EnemyRed_type4, true, false,
+            Tank::ETankType::EnemyRed_type4, true, true,
             Tank::EOrientation::Bottom, 0.05, getEnemyRespawn_1(),
             glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
     m_enemyTanks.emplace(std::make_shared<Tank>(
-            Tank::ETankType::EnemyRed_type4, true, false,
+            Tank::ETankType::EnemyRed_type4, true, true,
             Tank::EOrientation::Bottom, 0.05, getEnemyRespawn_2(),
             glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
     m_enemyTanks.emplace(std::make_shared<Tank>(
-            Tank::ETankType::EnemyRed_type2, true, false,
+            Tank::ETankType::EnemyRed_type2, true, true,
             Tank::EOrientation::Bottom, 0.05, getEnemyRespawn_3(),
             glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
     for (const auto &currentTank: m_enemyTanks) {
@@ -244,6 +251,10 @@ void Level::update(const double delta) {
 
     for (const auto &currentTank: m_enemyTanks) {
         currentTank->update(delta);
+        if (!currentTank->isActive()){
+            currentTank->reborn();
+            currentTank->update(delta);
+        }
     }
     for (const auto &currentEagle: m_eagle) {
         currentEagle->update(delta);

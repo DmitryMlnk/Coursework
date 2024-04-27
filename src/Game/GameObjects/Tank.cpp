@@ -47,7 +47,9 @@ Tank::Tank(const Tank::ETankType eType, const bool bHasAI,
           m_isSpawning(true),
           m_hasShield(false),
           m_eTankType(eType),
-          m_bShieldOnSpawn(bShieldOnSpawn) {
+          m_bShieldOnSpawn(bShieldOnSpawn),
+          m_starPosition(position),
+          m_startETankType(eType) {
     setOrientation(m_eOrientation);
     m_respawnTimer.setCallback([&]() {
         m_isSpawning = false;
@@ -210,7 +212,7 @@ void Tank::update(const double delta) {
 }
 
 void Tank::tankLogic() {
-    if (m_HP < 1){
+    if (m_HP < 1) {
         std::cout << "Fatal hp" << std::endl;
         m_isActive = false;
         m_isExplosion = true;
@@ -305,6 +307,7 @@ void Tank::updateTankLogic() {
             m_HP = 0;
             m_maxVelocity = 0;
     }
+    tankLogic();
 }
 
 void Tank::updateTackType() {
@@ -372,6 +375,7 @@ void Tank::updateTackType() {
         case ETankType::destroy:
             break;
     }
+    loadTankType();
 }
 
 void Tank::loadTankType() {
@@ -396,14 +400,26 @@ void Tank::loadTankType() {
 }
 
 void Tank::explosion() {
-    updateTackType();
-    updateTankLogic();
-    tankLogic();
-    loadTankType();
+    if (!m_hasShield and !m_isSpawning) {
+        updateTackType();
+        updateTankLogic();
+    }
 }
 
 void Tank::fire() {
     if (!m_isSpawning && !m_pCurrentBullet->isActive()) {
         m_pCurrentBullet->fire(m_position + m_size / 4.f + m_size * m_direction / 4.f, m_direction);
     }
+}
+
+void Tank::reborn() {
+    m_isSpawning = true;
+    m_position = m_starPosition;
+    m_targetPosition = m_position;
+    m_eTankType = m_startETankType;
+    m_respawnTimer.start(1500);
+    m_isActive = true;
+    updateTankLogic();
+    loadTankType();
+    render();
 }
