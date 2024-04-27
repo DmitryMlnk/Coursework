@@ -52,7 +52,7 @@ public:
 
     BrickWall(const EBrickWallType eBrickWallType, const glm::vec2& position, const glm::vec2& size, const float rotation, const float layer);
     virtual void render() const override;
-    void SetActivity(bool activity) override;
+    void explosion() override;
 
 
 private:

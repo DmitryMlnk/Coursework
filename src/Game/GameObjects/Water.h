@@ -24,7 +24,7 @@ public:
     virtual void render() const override;
     void update(const double delta) override;
     virtual bool collides(const EObjectType objectType) override;
-    void SetActivity(bool activity) override;
+    void explosion() override;
 
 private:
     void renderBlock(const EBlockLocation eBlockLocation) const;

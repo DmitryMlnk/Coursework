@@ -14,7 +14,7 @@ TankAI::TankAI(Tank *pParentTank)
 void TankAI::update(const double delta) {
 
     srand(static_cast<unsigned int> (m_pParentTank->getCurrentPosition().x * 10 + delta * 100));
-    m_randFire = rand() % 3;
+    m_randFire = rand() % 4;
     if ((rand() % 23) == 2) {
         m_orientation = rand() % 4;
         setOrientation();

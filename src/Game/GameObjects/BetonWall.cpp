@@ -92,4 +92,4 @@ void BetonWall::render() const {
 
 void BetonWall::update(const double delta) {}
 
-void BetonWall::SetActivity(bool activity) {}
+void BetonWall::explosion() {}

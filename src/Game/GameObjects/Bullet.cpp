@@ -22,7 +22,7 @@ Bullet::Bullet(const double velocity, const glm::vec2 &position,
     auto onCollisionCallback = [&](const IGameObject &object, const Physics::ECollisionDirection) {
         setVelocity(0);
         m_isExplosion = true;
-        std::cout << "ONCOLLISION CALLBACK BULLET" << std::endl;
+        std::cout << "ON COLLISION CALLBACK BULLET" << std::endl;
         m_explosionTimer.start(m_spriteAnimator_explosion.getTotalDuration());
     };
     m_colliders.emplace_back(glm::vec2(0), m_size, onCollisionCallback);
@@ -30,6 +30,7 @@ Bullet::Bullet(const double velocity, const glm::vec2 &position,
     m_explosionTimer.setCallback([&]() {
         m_isExplosion = false;
         m_isActive = false;
+        m_objectType = IGameObject::EObjectType::Bullet;
         std::cout << "SET CALLBACK BULLET" << std::endl;
         m_spriteAnimator_explosion.reset();
     });
@@ -85,7 +86,6 @@ void Bullet::update(const double delta) {
     if (m_isExplosion) {
         m_spriteAnimator_explosion.update(delta);
         m_explosionTimer.update(delta);
-        std::cout << "update isExplosion" << std::endl;
     }
 }
 
@@ -103,8 +103,10 @@ void Bullet::fire(const glm::vec2 &position, const glm::vec2 &direction) {
     setVelocity(m_maxVelocity);
 }
 
-void Bullet::SetActivity(bool activity) {
+void Bullet::explosion() {
     m_isExplosion = true;
+    m_isActive = false;
     m_velocity = 0;
-    m_explosionTimer.start(70);
+    m_explosionTimer.start(m_spriteAnimator_explosion.getTotalDuration());
+    m_objectType = IGameObject::EObjectType::Unknown;
 }

@@ -289,4 +289,4 @@ void BrickWall::render() const
     renderBrick(EBrickLocation::BottomRight);
 }
 
-void BrickWall::SetActivity(bool activity) {}
+void BrickWall::explosion() {}

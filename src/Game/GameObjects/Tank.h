@@ -89,11 +89,16 @@ public:
 
     void setVelocity(const double velocity) override;
 
-    void SetActivity(bool activity) override;
+    void explosion() override;
 
     void fire();
 
 private:
+
+    void checkTankType();
+
+    void loadTankType(ETankType &tankType);
+
     EOrientation m_eOrientation;
     std::shared_ptr<Bullet> m_pCurrentBullet;
 
@@ -131,7 +136,13 @@ private:
     bool m_hasShield;
     bool m_bShieldOnSpawn;
 
+    bool m_isRed = false;
+    bool m_isGreen = false;
+    bool m_isWhite = false;
+    bool m_hasMoreHP = false;
+
     std::unique_ptr<TankAI> m_pAIComponent;
+    ETankType m_eTankType;
 
     static const std::string &getTankSpriteFromType(const ETankType eType);
     static const std::string &getTankSpriteFromExplosion(const ETankExplosion eExplosion);

@@ -15,4 +15,4 @@ void Border::render() const
     m_sprite->render(m_position, m_size, m_rotation, m_layer);
 }
 
-void Border::SetActivity(bool activity) {}
+void Border::explosion() {}

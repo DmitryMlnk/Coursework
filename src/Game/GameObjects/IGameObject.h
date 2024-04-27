@@ -50,9 +50,9 @@ public:
 
     [[nodiscard]] const std::vector<Physics::Collider> &getColliders() const { return m_colliders; }
 
-    [[nodiscard]] EObjectType getObjectType() const { return m_objectType; }
+    EObjectType getObjectType() const { return m_objectType; }
 
-    virtual void SetActivity(bool activity) { m_isActive = activity; };
+    virtual void explosion() { };
 
     virtual bool isActive() { return m_isActive; }
 

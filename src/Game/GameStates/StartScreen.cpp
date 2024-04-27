@@ -45,15 +45,13 @@ getSpriteForDescription(const char description) {
         case 'F':
             return nullptr;
         default:
-            std::cerr << "Unknown Start Level description: " << description
-                      << std::endl;
+            std::cerr << "Unknown Start Level description: " << description << std::endl;
     }
     return nullptr;
 }
 
-StartScreen::StartScreen(const std::vector<std::string> &startScreenDescription, Game *pGame)
-        : m_pGame(pGame),
-        m_currentMenuSelection(0),
+StartScreen::StartScreen(const std::vector<std::string> &startScreenDescription)
+        : m_currentMenuSelection(0),
         m_keyReleased(true),
         m_backgroundSprite(std::make_pair(ResourceManager::getSprite("background"),
                                           glm::vec2(0, 0))),
@@ -126,10 +124,10 @@ void StartScreen::processInput(const std::array<bool, 349> &keys) {
     if (keys[GLFW_KEY_ENTER]) {
         switch (m_currentMenuSelection) {
             case 0:
-                m_pGame->startNewLevel(0, Game::EGameMode::OnePlayer);
+                Game::startNewLevel(0, Game::EGameMode::OnePlayer);
                 break;
             case 1:
-                m_pGame->startNewLevel(0, Game::EGameMode::TwoPlayers);
+                Game::startNewLevel(0, Game::EGameMode::TwoPlayers);
                 break;
             default:
                 break;

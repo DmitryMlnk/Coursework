@@ -31,7 +31,7 @@ public:
             const glm::vec2 &size, const float rotation, const float layer);
   virtual void render() const override;
   virtual void update(const double delta) override;
-  void SetActivity(bool activity) override;
+  void explosion() override;
 
 private:
   void renderBlock(const EBlockLocation eBlockLocation) const;

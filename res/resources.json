@@ -105,16 +105,6 @@
 				"player1_yellow_type1_bottom2",
 				"player1_yellow_type1_right1",
 				"player1_yellow_type1_right2",
-				
-				"enemy_white_type1_top1",
-				"enemy_white_type1_top2",
-				"enemy_white_type1_left1",
-				"enemy_white_type1_left2",
-				"enemy_white_type1_bottom1",
-				"enemy_white_type1_bottom2",
-				"enemy_white_type1_right1",
-				"enemy_white_type1_right2",
-				
 				"player1_yellow_type2_top1",
 				"player1_yellow_type2_top2",
 				"player1_yellow_type2_left1",
@@ -123,15 +113,6 @@
 				"player1_yellow_type2_bottom2",
 				"player1_yellow_type2_right1",
 				"player1_yellow_type2_right2",
-				"enemy_white_type2_top1",
-				"enemy_white_type2_top2",
-				"enemy_white_type2_left1",
-				"enemy_white_type2_left2",
-				"enemy_white_type2_bottom1",
-				"enemy_white_type2_bottom2",
-				"enemy_white_type2_right1",
-				"enemy_white_type2_right2",
-				
 				"player1_yellow_type3_top1",
 				"player1_yellow_type3_top2",
 				"player1_yellow_type3_left1",
@@ -140,15 +121,6 @@
 				"player1_yellow_type3_bottom2",
 				"player1_yellow_type3_right1",
 				"player1_yellow_type3_right2",
-				"enemy_white_type3_top1",
-				"enemy_white_type3_top2",
-				"enemy_white_type3_left1",
-				"enemy_white_type3_left2",
-				"enemy_white_type3_bottom1",
-				"enemy_white_type3_bottom2",
-				"enemy_white_type3_right1",
-				"enemy_white_type3_right2",
-				
 				"player1_yellow_type4_top1",
 				"player1_yellow_type4_top2",
 				"player1_yellow_type4_left1",
@@ -157,15 +129,8 @@
 				"player1_yellow_type4_bottom2",
 				"player1_yellow_type4_right1",
 				"player1_yellow_type4_right2",
-				"enemy_white_type4_top1",
-				"enemy_white_type4_top2",
-				"enemy_white_type4_left1",
-				"enemy_white_type4_left2",
-				"enemy_white_type4_bottom1",
-				"enemy_white_type4_bottom2",
-				"enemy_white_type4_right1",
-				"enemy_white_type4_right2",
-				
+
+
 				"player2_green_type1_top1",
 				"player2_green_type1_top2",
 				"player2_green_type1_left1",
@@ -174,15 +139,6 @@
 				"player2_green_type1_bottom2",
 				"player2_green_type1_right1",
 				"player2_green_type1_right2",
-				"enemy_green_type1_top1",
-				"enemy_green_type1_top2",
-				"enemy_green_type1_left1",
-				"enemy_green_type1_left2",
-				"enemy_green_type1_bottom1",
-				"enemy_green_type1_bottom2",
-				"enemy_green_type1_right1",
-				"enemy_green_type1_right2",
-				
 				"player2_green_type2_top1",
 				"player2_green_type2_top2",
 				"player2_green_type2_left1",
@@ -191,15 +147,6 @@
 				"player2_green_type2_bottom2",
 				"player2_green_type2_right1",
 				"player2_green_type2_right2",
-				"enemy_green_type2_top1",
-				"enemy_green_type2_top2",
-				"enemy_green_type2_left1",
-				"enemy_green_type2_left2",
-				"enemy_green_type2_bottom1",
-				"enemy_green_type2_bottom2",
-				"enemy_green_type2_right1",
-				"enemy_green_type2_right2",
-				
 				"player2_green_type3_top1",
 				"player2_green_type3_top2",
 				"player2_green_type3_left1",
@@ -208,15 +155,6 @@
 				"player2_green_type3_bottom2",
 				"player2_green_type3_right1",
 				"player2_green_type3_right2",
-				"enemy_green_type3_top1",
-				"enemy_green_type3_top2",
-				"enemy_green_type3_left1",
-				"enemy_green_type3_left2",
-				"enemy_green_type3_bottom1",
-				"enemy_green_type3_bottom2",
-				"enemy_green_type3_right1",
-				"enemy_green_type3_right2",
-				
 				"player2_green_type4_top1",
 				"player2_green_type4_top2",
 				"player2_green_type4_left1",
@@ -225,6 +163,66 @@
 				"player2_green_type4_bottom2",
 				"player2_green_type4_right1",
 				"player2_green_type4_right2",
+
+
+				"enemy_white_type1_top1",
+				"enemy_white_type1_top2",
+				"enemy_white_type1_left1",
+				"enemy_white_type1_left2",
+				"enemy_white_type1_bottom1",
+				"enemy_white_type1_bottom2",
+				"enemy_white_type1_right1",
+				"enemy_white_type1_right2",
+				"enemy_white_type2_top1",
+				"enemy_white_type2_top2",
+				"enemy_white_type2_left1",
+				"enemy_white_type2_left2",
+				"enemy_white_type2_bottom1",
+				"enemy_white_type2_bottom2",
+				"enemy_white_type2_right1",
+				"enemy_white_type2_right2",
+				"enemy_white_type3_top1",
+				"enemy_white_type3_top2",
+				"enemy_white_type3_left1",
+				"enemy_white_type3_left2",
+				"enemy_white_type3_bottom1",
+				"enemy_white_type3_bottom2",
+				"enemy_white_type3_right1",
+				"enemy_white_type3_right2",
+				"enemy_white_type4_top1",
+				"enemy_white_type4_top2",
+				"enemy_white_type4_left1",
+				"enemy_white_type4_left2",
+				"enemy_white_type4_bottom1",
+				"enemy_white_type4_bottom2",
+				"enemy_white_type4_right1",
+				"enemy_white_type4_right2",
+
+
+				"enemy_green_type1_top1",
+				"enemy_green_type1_top2",
+				"enemy_green_type1_left1",
+				"enemy_green_type1_left2",
+				"enemy_green_type1_bottom1",
+				"enemy_green_type1_bottom2",
+				"enemy_green_type1_right1",
+				"enemy_green_type1_right2",
+				"enemy_green_type2_top1",
+				"enemy_green_type2_top2",
+				"enemy_green_type2_left1",
+				"enemy_green_type2_left2",
+				"enemy_green_type2_bottom1",
+				"enemy_green_type2_bottom2",
+				"enemy_green_type2_right1",
+				"enemy_green_type2_right2",
+				"enemy_green_type3_top1",
+				"enemy_green_type3_top2",
+				"enemy_green_type3_left1",
+				"enemy_green_type3_left2",
+				"enemy_green_type3_bottom1",
+				"enemy_green_type3_bottom2",
+				"enemy_green_type3_right1",
+				"enemy_green_type3_right2",
 				"enemy_green_type4_top1",
 				"enemy_green_type4_top2",
 				"enemy_green_type4_left1",
@@ -233,8 +231,8 @@
 				"enemy_green_type4_bottom2",
 				"enemy_green_type4_right1",
 				"enemy_green_type4_right2",
-				
-				
+
+
 				"enemy_red_type1_top1",
 				"enemy_red_type1_top2",
 				"enemy_red_type1_left1",
@@ -243,7 +241,6 @@
 				"enemy_red_type1_bottom2",
 				"enemy_red_type1_right1",
 				"enemy_red_type1_right2",
-
 				"enemy_red_type2_top1",
 				"enemy_red_type2_top2",
 				"enemy_red_type2_left1",
@@ -252,7 +249,6 @@
 				"enemy_red_type2_bottom2",
 				"enemy_red_type2_right1",
 				"enemy_red_type2_right2",
-
 				"enemy_red_type3_top1",
 				"enemy_red_type3_top2",
 				"enemy_red_type3_left1",
@@ -261,7 +257,6 @@
 				"enemy_red_type3_bottom2",
 				"enemy_red_type3_right1",
 				"enemy_red_type3_right2",
-
 				"enemy_red_type4_top1",
 				"enemy_red_type4_top2",
 				"enemy_red_type4_left1",
@@ -524,16 +519,16 @@
 			"frames" : [
                 {
                     "subTexture" : "explosion1",
-                    "duration"   : 70
+                    "duration"   : 50
                 },
                 {
                     "subTexture" : "explosion2",
-                    "duration"   : 70
+                    "duration"   : 50
                 }
                 ,
                 {
                     "subTexture" : "explosion3",
-                    "duration"   : 70
+                    "duration"   : 50
                 }
             ]
 		},
@@ -577,11 +572,11 @@
 			"frames" : [
                 {
                     "subTexture" : "bigExplosion1_bottom_left",
-                    "duration"   : 500
+                    "duration"   : 100
                 },
                 {
                     "subTexture" : "bigExplosion2_bottom_left",
-                    "duration"   : 500
+                    "duration"   : 100
                 }
             ]
 		},
@@ -593,11 +588,11 @@
 			"frames" : [
                 {
                     "subTexture" : "bigExplosion1_bottom_right",
-                    "duration"   : 500
+                    "duration"   : 100
                 },
                 {
                     "subTexture" : "bigExplosion2_bottom_right",
-                    "duration"   : 500
+                    "duration"   : 100
                 }
             ]
 		},

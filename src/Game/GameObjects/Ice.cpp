@@ -26,4 +26,4 @@ void Ice::render() const
     renderBlock(EBlockLocation::BottomRight);
 }
 
-void Ice::SetActivity(bool activity) {}
+void Ice::explosion() {}

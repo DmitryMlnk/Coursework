@@ -92,13 +92,12 @@ Level::Level(const std::vector<std::string> &levelDescription,
 
     m_playerRespawn_1 = {BLOCK_SIZE * (m_widthBlocks / 2 - 1), BLOCK_SIZE / 2};
     m_playerRespawn_2 = {BLOCK_SIZE * (m_widthBlocks / 2 + 3), BLOCK_SIZE / 2};
-    m_enemyRespawn_1 = {BLOCK_SIZE, BLOCK_SIZE * m_heightBlocks - BLOCK_SIZE / 2};
-    m_enemyRespawn_2 = {BLOCK_SIZE * (m_widthBlocks / 2 + 1),
-                        BLOCK_SIZE * m_heightBlocks - BLOCK_SIZE / 2};
-    m_enemyRespawn_3 = {BLOCK_SIZE * m_widthBlocks,
-                        BLOCK_SIZE * m_heightBlocks - BLOCK_SIZE / 2};
 
-    m_levelObjects.reserve(m_widthBlocks * m_heightBlocks + 4);
+    m_enemyRespawn_1 = {BLOCK_SIZE, BLOCK_SIZE * m_heightBlocks - BLOCK_SIZE / 2};
+    m_enemyRespawn_2 = {BLOCK_SIZE * (m_widthBlocks / 2 + 1), BLOCK_SIZE * m_heightBlocks - BLOCK_SIZE / 2};
+    m_enemyRespawn_3 = {BLOCK_SIZE * m_widthBlocks, BLOCK_SIZE * m_heightBlocks - BLOCK_SIZE / 2};
+
+    m_levelObjects.reserve(m_widthBlocks * m_heightBlocks + 5);
     unsigned int currentBottomOffset = static_cast<unsigned int>(
             BLOCK_SIZE * (m_heightBlocks - 1) + BLOCK_SIZE / 2.f);
     for (const std::string &currentRow: levelDescription) {
@@ -125,13 +124,16 @@ Level::Level(const std::vector<std::string> &levelDescription,
                     m_enemyRespawn_3 = {currentLeftOffset, currentBottomOffset};
                     m_levelObjects.emplace_back(nullptr);
                     break;
+                case 'E':
+                    std::cout << "Added eagle pos" << std::endl;
+                    m_eagleRespawn.emplace_back(currentLeftOffset, currentBottomOffset);
+                    break;
                 default:
                     m_levelObjects.emplace_back(createGameObjectFromDescription(
                             currentElement, glm::vec2(currentLeftOffset, currentBottomOffset),
-                            glm::vec2(BLOCK_SIZE, BLOCK_SIZE), 0.f));
+                            glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
                     break;
             }
-
             currentLeftOffset += BLOCK_SIZE;
         }
         currentBottomOffset -= BLOCK_SIZE;
@@ -176,6 +178,10 @@ void Level::initLevel() {
             Physics::PhysicsEngine::addDynamicGameObject(m_pTank1);
     }
 
+    for (const auto currentEaglePos : m_eagleRespawn){
+        m_eagle.emplace(std::make_shared<Eagle>(currentEaglePos, glm::vec2(BLOCK_SIZE, BLOCK_SIZE),0.f, 0.1f));
+    }
+
     m_enemyTanks.emplace(std::make_shared<Tank>(
             Tank::ETankType::EnemyWhite_type1, true, false,
             Tank::EOrientation::Bottom, 0.05, getEnemyRespawn_1(),
@@ -191,6 +197,11 @@ void Level::initLevel() {
     for (const auto &currentTank: m_enemyTanks) {
         Physics::PhysicsEngine::addDynamicGameObject(currentTank);
     }
+    for (const auto &currentEagle: m_eagle) {
+        Physics::PhysicsEngine::addDynamicGameObject(currentEagle);
+        std::cout << "Eagle added to dynamic obj" << std::endl;
+    }
+
 }
 
 void Level::render() const {
@@ -208,6 +219,9 @@ void Level::render() const {
             m_pTank1->render();
     }
 
+    for (const auto &currentEagle: m_eagle) {
+        currentEagle->render();
+    }
     for (const auto &currentTank: m_enemyTanks) {
         currentTank->render();
     }
@@ -219,6 +233,7 @@ void Level::update(const double delta) {
             currentLevelObject->update(delta);
         }
     }
+
     switch (m_eGameMode) {
         case Game::EGameMode::TwoPlayers:
             m_pTank2->update(delta);
@@ -229,6 +244,21 @@ void Level::update(const double delta) {
 
     for (const auto &currentTank: m_enemyTanks) {
         currentTank->update(delta);
+    }
+    for (const auto &currentEagle: m_eagle) {
+        currentEagle->update(delta);
+        if (!currentEagle->isActive()) {
+            std::cout << "Lvl lose" << std::endl;
+            Game::setStartScreen();
+            break;
+        }
+    }
+    if (m_eGameMode == Game::EGameMode::OnePlayer and !m_pTank1->isActive()){
+        std::cout << "Lvl lose" << std::endl;
+        Game::setStartScreen();
+    } else if (m_eGameMode == Game::EGameMode::TwoPlayers and !m_pTank1->isActive() and !m_pTank2->isActive()){
+        std::cout << "Lvl lose" << std::endl;
+        Game::setStartScreen();
     }
 }
 
@@ -286,8 +316,8 @@ unsigned int Level::getStateHeight() const {
     return static_cast<unsigned int>((m_heightBlocks + 1) * BLOCK_SIZE);
 }
 
-std::vector<std::shared_ptr<IGameObject>>Level::getObjectsInArea(const glm::vec2 &bottomLeft,
-                                                                 const glm::vec2 &topRight) const {
+std::vector<std::shared_ptr<IGameObject>> Level::getObjectsInArea(const glm::vec2 &bottomLeft,
+                                                                  const glm::vec2 &topRight) const {
     std::vector<std::shared_ptr<IGameObject>> output;
     output.reserve(9);
 

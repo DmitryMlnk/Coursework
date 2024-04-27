@@ -38,4 +38,4 @@ void Water::update(const double delta)
      return objectType != IGameObject::EObjectType::Bullet;
  }
 
- void Water::SetActivity(bool activity) {}
+ void Water::explosion() {}

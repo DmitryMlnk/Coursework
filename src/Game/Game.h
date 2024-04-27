@@ -3,6 +3,7 @@
 #include <array>
 #include <glm/vec2.hpp>
 #include <memory>
+#include "../Renderer/Timer.h"
 
 class IGameState;
 
@@ -16,33 +17,32 @@ public:
         OnePlayer, TwoPlayers
     };
 
-    Game(const glm::uvec2 &windowSize);
-
+    Game();
     ~Game();
 
-    void render();
+    static void render();
 
-    void update(const double delta);
+    static void update(const double delta);
 
-    void setKey(const int key, const int action);
+    static void setKey(const int key, const int action);
 
-    bool init();
+    static bool init();
 
-    unsigned int getCurrentWidth() const;
+    static void initStartScreen(glm::uvec2 &windowSize);
 
-    unsigned int getCurrentHeight() const;
+    static unsigned int getCurrentWidth();
 
-    void startNewLevel(const size_t level, const EGameMode eGameMode);
+    static unsigned int getCurrentHeight();
 
-    void nextLevel(const EGameMode eGameMode);
+    static void startNewLevel(const size_t level, const EGameMode eGameMode);
 
-    void updateViewport();
+    static void nextLevel(const EGameMode eGameMode);
 
-    void setWindowSize(const glm::uvec2 &windowSize);
+    static void updateViewport();
 
-    unsigned int getWindowsSizeX(){ return m_windowSize.x; }
+    static void setStartScreen();
 
-    unsigned int getWindowsSizeY(){ return m_windowSize.y ; }
+    static void setWindowSize(glm::uvec2 &windowSize);
 
 private:
     enum class EGameState {
@@ -54,12 +54,13 @@ private:
         GameOver
     };
 
-    std::array<bool, 349> m_keys;
+    static std::array<bool, 349> m_keys;
 
-    glm::ivec2 m_windowSize;
-    EGameState m_eCurrentGameState;
+    static glm::uvec2 m_windowSize;
+    static EGameState m_eCurrentGameState;
 
-    std::shared_ptr<IGameState> m_pCurrentGameState;
-    std::shared_ptr<RenderEngine::ShaderProgram> m_pSpriteShaderProgram;
-    size_t m_currentLevelIndex;
+    static Timer m_changeScreenTimer;
+    static std::shared_ptr<IGameState> m_pCurrentGameState;
+    static std::shared_ptr<RenderEngine::ShaderProgram> m_pSpriteShaderProgram;
+    static size_t m_currentLevelIndex;
 };

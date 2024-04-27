@@ -15,12 +15,11 @@
 static constexpr unsigned int SCALE = 3;
 static constexpr unsigned int BLOCK_SIZE = 16;
 glm::uvec2 g_windowSize(SCALE * 16 * BLOCK_SIZE, SCALE * 15 * BLOCK_SIZE);
-std::unique_ptr<Game> g_game = std::make_unique<Game>(g_windowSize);
 
 void glfwWindowSizeCallback(GLFWwindow *pWindow, int width, int height) {
     g_windowSize.x = width;
     g_windowSize.y = height;
-    g_game->setWindowSize(g_windowSize);
+    Game::setWindowSize(g_windowSize);
 }
 
 void glfwKeyCallback(GLFWwindow *pWindow, int key, int scancode, int action,
@@ -28,7 +27,7 @@ void glfwKeyCallback(GLFWwindow *pWindow, int key, int scancode, int action,
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(pWindow, GL_TRUE);
     }
-    g_game->setKey(key, action);
+    Game::setKey(key, action);
 }
 
 int main(int argc, char **argv) {
@@ -72,7 +71,8 @@ int main(int argc, char **argv) {
     {
         ResourceManager::setExecutablePath(argv[0]);
         Physics::PhysicsEngine::init();
-        g_game->init();
+        Game::initStartScreen(g_windowSize);
+        Game::init();
 
         auto lastTime = std::chrono::high_resolution_clock::now();
 
@@ -84,19 +84,18 @@ int main(int argc, char **argv) {
             auto currentTime = std::chrono::high_resolution_clock::now();
             double duration = std::chrono::duration<double, std::milli>(currentTime - lastTime).count();
             lastTime = currentTime;
-            g_game->update(duration);
+            Game::update(duration);
             Physics::PhysicsEngine::update(duration);
 
             /* Render here */
             RenderEngine::Renderer::clear();
-            g_game->render();
+            Game::render();
 
             /* Swap front and back buffers */
             glfwSwapBuffers(pWindow);
         } // Game loop
 
         Physics::PhysicsEngine::terminate();
-        g_game = nullptr;
         ResourceManager::unloadAllResources();
     }
 

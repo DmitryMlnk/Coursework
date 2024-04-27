@@ -26,4 +26,4 @@ void Trees::render() const
     renderBlock(EBlockLocation::BottomRight);
 }
 
-void Trees::SetActivity(bool activity) {}
+void Trees::explosion() {}

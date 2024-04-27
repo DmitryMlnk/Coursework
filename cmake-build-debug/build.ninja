@@ -250,7 +250,7 @@ build bin/World_of_FCSaN: CXX_EXECUTABLE_LINKER__World_of_FCSaN_Debug CMakeFiles
   FLAGS = -g
   LINK_LIBRARIES = lib/glfw/src/libglfw3.a  lib/glad/libglad.a  /usr/lib/x86_64-linux-gnu/librt.a  -lm  -ldl  /usr/lib/x86_64-linux-gnu/libX11.so
   OBJECT_DIR = CMakeFiles/World_of_FCSaN.dir
-  POST_BUILD = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug && /snap/clion/274/bin/cmake/linux/x64/bin/cmake -E copy_directory /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/res /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/bin/res
+  POST_BUILD = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug && /snap/clion/275/bin/cmake/linux/x64/bin/cmake -E copy_directory /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/res /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/bin/res
   PRE_LINK = :
   TARGET_FILE = bin/World_of_FCSaN
   TARGET_PDB = World_of_FCSaN.dbg
@@ -260,7 +260,7 @@ build bin/World_of_FCSaN: CXX_EXECUTABLE_LINKER__World_of_FCSaN_Debug CMakeFiles
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug && /snap/clion/274/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug && /snap/clion/275/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -271,7 +271,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug && /snap/clion/274/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN -B/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug
+  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug && /snap/clion/275/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN -B/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -288,7 +288,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # Utility command for edit_cache
 
 build lib/glfw/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glfw && /snap/clion/274/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glfw && /snap/clion/275/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -299,7 +299,7 @@ build lib/glfw/edit_cache: phony lib/glfw/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build lib/glfw/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glfw && /snap/clion/274/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN -B/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug
+  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glfw && /snap/clion/275/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN -B/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -469,7 +469,7 @@ build lib/glfw/src/libglfw3.a: C_STATIC_LIBRARY_LINKER__glfw_Debug lib/glfw/src/
 # Utility command for edit_cache
 
 build lib/glfw/src/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glfw/src && /snap/clion/274/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glfw/src && /snap/clion/275/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -480,7 +480,7 @@ build lib/glfw/src/edit_cache: phony lib/glfw/src/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build lib/glfw/src/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glfw/src && /snap/clion/274/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN -B/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug
+  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glfw/src && /snap/clion/275/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN -B/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -529,7 +529,7 @@ build lib/glad/libglad.a: C_STATIC_LIBRARY_LINKER__glad_Debug lib/glad/CMakeFile
 # Utility command for edit_cache
 
 build lib/glad/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glad && /snap/clion/274/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glad && /snap/clion/275/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -540,7 +540,7 @@ build lib/glad/edit_cache: phony lib/glad/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build lib/glad/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glad && /snap/clion/274/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN -B/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug
+  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glad && /snap/clion/275/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN -B/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -557,7 +557,7 @@ build lib/glad/rebuild_cache: phony lib/glad/CMakeFiles/rebuild_cache.util
 # Utility command for edit_cache
 
 build lib/glm/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glm && /snap/clion/274/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glm && /snap/clion/275/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -568,7 +568,7 @@ build lib/glm/edit_cache: phony lib/glm/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build lib/glm/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glm && /snap/clion/274/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN -B/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug
+  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glm && /snap/clion/275/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN -B/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -585,7 +585,7 @@ build lib/glm/rebuild_cache: phony lib/glm/CMakeFiles/rebuild_cache.util
 # Utility command for edit_cache
 
 build lib/glm/glm/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glm/glm && /snap/clion/274/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glm/glm && /snap/clion/275/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -596,7 +596,7 @@ build lib/glm/glm/edit_cache: phony lib/glm/glm/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build lib/glm/glm/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glm/glm && /snap/clion/274/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN -B/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug
+  COMMAND = cd /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug/lib/glm/glm && /snap/clion/275/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN -B/home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -668,14 +668,14 @@ build lib/glm/glm/all: phony
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glad/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/CMake/modules/FindVulkan.cmake /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/glfw3.pc.in /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/glfw3Config.cmake.in /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/glfw_config.h.in /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glm/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glm/glm/CMakeLists.txt /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/BasicConfigVersion-SameMajorVersion.cmake.in /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakePackageConfigHelpers.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckFunctionExists.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckIncludeFile.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckLibraryExists.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindFontconfig.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindFreetype.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindPackageMessage.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindPkgConfig.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindThreads.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindX11.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/GNUInstallDirs.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/UnixPaths.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/SelectLibraryConfigurations.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/3.28.1/CMakeCCompiler.cmake CMakeFiles/3.28.1/CMakeCXXCompiler.cmake CMakeFiles/3.28.1/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glad/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/CMake/modules/FindVulkan.cmake /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/glfw3.pc.in /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/glfw3Config.cmake.in /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/glfw_config.h.in /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glm/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glm/glm/CMakeLists.txt /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/BasicConfigVersion-SameMajorVersion.cmake.in /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakePackageConfigHelpers.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckFunctionExists.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckIncludeFile.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckLibraryExists.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindFontconfig.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindFreetype.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindPackageMessage.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindPkgConfig.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindThreads.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindX11.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/GNUInstallDirs.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/UnixPaths.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/SelectLibraryConfigurations.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/3.28.1/CMakeCCompiler.cmake CMakeFiles/3.28.1/CMakeCXXCompiler.cmake CMakeFiles/3.28.1/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glad/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/CMake/modules/FindVulkan.cmake /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/glfw3.pc.in /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/glfw3Config.cmake.in /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/glfw_config.h.in /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glm/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glm/glm/CMakeLists.txt /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/BasicConfigVersion-SameMajorVersion.cmake.in /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakePackageConfigHelpers.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckFunctionExists.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckIncludeFile.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckLibraryExists.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindFontconfig.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindFreetype.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindPackageMessage.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindPkgConfig.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindThreads.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindX11.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/GNUInstallDirs.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/UnixPaths.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/SelectLibraryConfigurations.cmake /snap/clion/274/bin/cmake/linux/x64/share/cmake-3.28/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/3.28.1/CMakeCCompiler.cmake CMakeFiles/3.28.1/CMakeCXXCompiler.cmake CMakeFiles/3.28.1/CMakeSystem.cmake: phony
+build /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glad/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/CMake/modules/FindVulkan.cmake /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/glfw3.pc.in /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/glfw3Config.cmake.in /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glfw/src/glfw_config.h.in /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glm/CMakeLists.txt /home/dmitry/Kyrsach/Exemple_kyrsach/World_of_FCSaN/lib/glm/glm/CMakeLists.txt /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/BasicConfigVersion-SameMajorVersion.cmake.in /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCInformation.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCXXInformation.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeCommonLanguageInclude.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeGenericSystem.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeInitializeConfigs.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeLanguageInformation.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakePackageConfigHelpers.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInformation.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CMakeSystemSpecificInitialize.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckCSourceCompiles.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckFunctionExists.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckIncludeFile.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/CheckLibraryExists.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/CMakeCommonCompilerMacros.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-C.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU-CXX.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Compiler/GNU.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindFontconfig.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindFreetype.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindPackageMessage.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindPkgConfig.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindThreads.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/FindX11.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/GNUInstallDirs.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-C.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU-CXX.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-GNU.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux-Initialize.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/Linux.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/Platform/UnixPaths.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/SelectLibraryConfigurations.cmake /snap/clion/275/bin/cmake/linux/x64/share/cmake-3.28/Modules/WriteBasicConfigVersionFile.cmake CMakeCache.txt CMakeFiles/3.28.1/CMakeCCompiler.cmake CMakeFiles/3.28.1/CMakeCXXCompiler.cmake CMakeFiles/3.28.1/CMakeSystem.cmake: phony
 
 
 #############################################

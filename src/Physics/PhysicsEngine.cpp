@@ -11,6 +11,7 @@ namespace Physics {
     std::shared_ptr<Level> PhysicsEngine::m_pCurrentLevel;
 
     void PhysicsEngine::init() {}
+
     void PhysicsEngine::terminate() {
         m_dynamicObjects.clear();
         m_pCurrentLevel.reset();
@@ -44,25 +45,40 @@ namespace Physics {
                         pObject1->getTargetPosition() = pObject1->getCurrentPosition();
                         if (pObject2->getObjectType() == IGameObject::EObjectType::Tank and
                             pObject1->getObjectType() == IGameObject::EObjectType::Bullet) {
-                            std::cout << "Attack 1 to 2" << std::endl;
-                            pObject1->SetActivity(false);
-                            pObject2->SetActivity(false);
-                        }
-                        if (pObject1->getObjectType() == IGameObject::EObjectType::Bullet and
-                        pObject2->getObjectType() == IGameObject::EObjectType::Bullet){
-                            pObject1->SetActivity(false);
-                            pObject2->SetActivity(false);
+                            std::cout << "Tank => Bullet" << std::endl;
+                            pObject1->explosion();
+                            pObject2->explosion();
+                        } else if (pObject2->getObjectType() == IGameObject::EObjectType::Bullet and
+                                   pObject1->getObjectType() == IGameObject::EObjectType::Bullet) {
+                            std::cout << "Bullet => Bullet" << std::endl;
+                            pObject1->explosion();
+                            pObject2->explosion();
+                        } else if (pObject2->getObjectType() == IGameObject::EObjectType::Eagle and
+                            pObject1->getObjectType() == IGameObject::EObjectType::Bullet) {
+                            std::cout << "Eagle => Bullet" << std::endl;
+                            pObject1->explosion();
+                            pObject2->explosion();
                         }
                     }
-
                     if (hasPositionIntersection(pObject2, pObject2->getTargetPosition(),
                                                 pObject1, pObject1->getCurrentPosition())) {
                         pObject2->getTargetPosition() = pObject2->getCurrentPosition();
                         if (pObject1->getObjectType() == IGameObject::EObjectType::Tank and
                             pObject2->getObjectType() == IGameObject::EObjectType::Bullet) {
-                            std::cout << "Attack  2 to 1" << std::endl;
-                            pObject1->SetActivity(false);
-                            pObject2->SetActivity(false);
+                            std::cout << "Tank => Bullet" << std::endl;
+                            pObject1->explosion();
+                            pObject2->explosion();
+                        } else if (pObject1->getObjectType() == IGameObject::EObjectType::Bullet and
+                            pObject2->getObjectType() == IGameObject::EObjectType::Bullet) {
+                            std::cout << "Bullet => Bullet" << std::endl;
+                            pObject1->explosion();
+                            pObject2->explosion();
+                        } else if (pObject1->getObjectType() == IGameObject::EObjectType::Eagle and
+                                   pObject2->getObjectType() == IGameObject::EObjectType::Bullet)
+                        {
+                            std::cout << "Eagle => Bullet" << std::endl;
+                            pObject1->explosion();
+                            pObject2->explosion();
                         }
                     }
                 }
@@ -81,20 +97,24 @@ namespace Physics {
                     0.f) // right and left
                 {
                     currentDynamicObject->getTargetPosition() = glm::vec2(currentDynamicObject->getCurrentPosition().x,
-                                                                          static_cast<unsigned int>(currentDynamicObject->getCurrentPosition().y / 4.f + 0.5f) * 4.f);
+                                                                          static_cast<unsigned int>(
+                                                                                  currentDynamicObject->getCurrentPosition().y /
+                                                                                  4.f + 0.5f) * 4.f);
                 } else if (currentDynamicObject->getCurrentDirection().y != 0.f) // top and bottom
                 {
                     currentDynamicObject->getTargetPosition() = glm::vec2(static_cast<unsigned int>(
-                            currentDynamicObject->getCurrentPosition().x / 4.f + 0.5f) * 4.f,
-                            currentDynamicObject->getCurrentPosition().y);
+                                                                                  currentDynamicObject->getCurrentPosition().x /
+                                                                                  4.f + 0.5f) * 4.f,
+                                                                          currentDynamicObject->getCurrentPosition().y);
                 }
 
                 const auto newPosition = currentDynamicObject->getTargetPosition() +
-                                                           currentDynamicObject->getCurrentDirection() *
-                                                           static_cast<float>(currentDynamicObject->getCurrentVelocity() * delta);
-                std::vector<std::shared_ptr<IGameObject>> objectsToCheck = m_pCurrentLevel->getObjectsInArea( newPosition,
-                                                                                                              newPosition +
-                                                                                                              currentDynamicObject->getSize());
+                                         currentDynamicObject->getCurrentDirection() *
+                                         static_cast<float>(currentDynamicObject->getCurrentVelocity() * delta);
+                std::vector<std::shared_ptr<IGameObject>> objectsToCheck = m_pCurrentLevel->getObjectsInArea(
+                        newPosition,
+                        newPosition +
+                        currentDynamicObject->getSize());
 
                 const auto &colliders = currentDynamicObject->getColliders();
                 bool hasCollision = false;
@@ -119,7 +139,8 @@ namespace Physics {
                 for (const auto &currentDynamicObjectCollider: colliders) {
                     for (const auto &currentObjectToCheck: objectsToCheck) {
                         const auto &collidersToCheck = currentObjectToCheck->getColliders();
-                        if (currentObjectToCheck->collides(currentDynamicObject->getObjectType()) && !collidersToCheck.empty()) {
+                        if (currentObjectToCheck->collides(currentDynamicObject->getObjectType()) &&
+                            !collidersToCheck.empty()) {
                             for (const auto &currentObjectCollider: currentObjectToCheck->getColliders()) {
                                 if (currentObjectCollider.isActive &&
                                     hasCollidersIntersection(
@@ -129,12 +150,12 @@ namespace Physics {
                                             currentObjectToCheck->getCurrentPosition())) {
                                     hasCollision = true;
                                     if (currentObjectCollider.onCollisionCallback) {
-                                        currentObjectCollider.onCollisionCallback(*currentDynamicObject, objectCollisionDirection);
-                                        std::cout << "on Collider callback first" << std:: endl;
+                                        currentObjectCollider.onCollisionCallback(*currentDynamicObject,
+                                                                                  objectCollisionDirection);
                                     }
                                     if (currentDynamicObjectCollider.onCollisionCallback) {
-                                        currentDynamicObjectCollider.onCollisionCallback(*currentObjectToCheck, dynamicObjectCollisionDirection);
-                                        std::cout << "on Collider callback second" << std:: endl;
+                                        currentDynamicObjectCollider.onCollisionCallback(*currentObjectToCheck,
+                                                                                         dynamicObjectCollisionDirection);
                                     }
                                 }
                             }
@@ -148,12 +169,16 @@ namespace Physics {
                     // align position to multiple of 8 pixels
                     if (currentDynamicObject->getCurrentDirection().x != 0.f) // right and left
                     {
-                        currentDynamicObject->getTargetPosition() = glm::vec2(static_cast<unsigned int>(currentDynamicObject->getTargetPosition().x / 4.f + 0.5f) * 4.f,
-                                                                              currentDynamicObject->getTargetPosition().y);
+                        currentDynamicObject->getTargetPosition() = glm::vec2(
+                                static_cast<unsigned int>(currentDynamicObject->getTargetPosition().x / 4.f + 0.5f) *
+                                4.f,
+                                currentDynamicObject->getTargetPosition().y);
                     } else if (currentDynamicObject->getCurrentDirection().y != 0.f) // top and bottom
                     {
-                        currentDynamicObject->getTargetPosition() = glm::vec2(currentDynamicObject->getTargetPosition().x
-                                ,static_cast<unsigned int>(currentDynamicObject->getTargetPosition().y / 4.f + 0.5f) * 4.f);
+                        currentDynamicObject->getTargetPosition() = glm::vec2(
+                                currentDynamicObject->getTargetPosition().x,
+                                static_cast<unsigned int>(currentDynamicObject->getTargetPosition().y / 4.f + 0.5f) *
+                                4.f);
                     }
                 }
             }
@@ -193,10 +218,10 @@ namespace Physics {
                                                  const Collider &collider2,
                                                  const glm::vec2 &position2) {
         const glm::vec2 collider1_bottomLeft_world = collider1.boundingBox.bottomLeft + position1;
-        const glm::vec2 collider1_topRight_world =   collider1.boundingBox.topRight + position1;
+        const glm::vec2 collider1_topRight_world = collider1.boundingBox.topRight + position1;
 
         const glm::vec2 collider2_bottomLeft_world = collider2.boundingBox.bottomLeft + position2;
-        const glm::vec2 collider2_topRight_world =   collider2.boundingBox.topRight + position2;
+        const glm::vec2 collider2_topRight_world = collider2.boundingBox.topRight + position2;
 
         if (collider1_bottomLeft_world.x >= collider2_topRight_world.x) {
             return false;

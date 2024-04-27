@@ -23,7 +23,7 @@ public:
   static constexpr unsigned int MENU_HEIGHT = 64;
   static constexpr unsigned int TANK_SIZE = BLOCK_SIZE * 2;
 
-  StartScreen(const std::vector<std::string> &startScreenDescription, Game *pGame);
+  StartScreen(const std::vector<std::string> &startScreenDescription);
 
   virtual void render() const override;
   virtual void update(const double delta) override;
