@@ -83,7 +83,7 @@ void BetonWall::renderBlock(const EBlockLocation eBlockLocation) const {
   }
 }
 
-void BetonWall::render() const {
+void BetonWall::render()  {
   renderBlock(EBlockLocation::TopLeft);
   renderBlock(EBlockLocation::TopRight);
   renderBlock(EBlockLocation::BottomLeft);

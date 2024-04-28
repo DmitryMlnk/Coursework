@@ -21,9 +21,16 @@
 
 std::array<bool, 349> Game::m_keys;
 glm::uvec2 Game::m_windowSize;
+glm::vec2 Game::m_losePosition;
+Game::EGameMode Game::m_eCurrentGameMode;
 Game::EGameState Game::m_eCurrentGameState;
+unsigned int Game::m_enemyDestroyCount;
 std::shared_ptr<IGameState> Game::m_pCurrentGameState;
+std::shared_ptr<RenderEngine::Sprite> Game::m_pLoseSprite;
+std::vector<Tank::ETankType> Game::m_playerTankType;
 std::shared_ptr<RenderEngine::ShaderProgram> Game::m_pSpriteShaderProgram;
+Tank::ETankType Game::m_firstsPlayerTankType;
+Tank::ETankType Game::m_secondPlayerTankType;
 size_t Game::m_currentLevelIndex;
 Timer Game::m_changeScreenTimer;
 
@@ -36,12 +43,16 @@ void Game::setWindowSize(glm::uvec2 &windowSize) {
     updateViewport();
 }
 
-Game::Game() {
-}
+Game::Game() {}
 
 Game::~Game() {}
 
-void Game::render() { m_pCurrentGameState->render(); }
+void Game::render() {
+    m_pCurrentGameState->render();
+    if (m_changeScreenTimer.isActive()) {
+        m_pLoseSprite->render(glm::vec2(m_losePosition.x, ++m_losePosition.y), glm::vec2(136, 32), 0, 1.f);
+    }
+}
 
 void Game::updateViewport() {
     const float level_aspect_ratio = static_cast<float>(getCurrentWidth()) / getCurrentHeight();
@@ -70,39 +81,51 @@ void Game::updateViewport() {
 }
 
 void Game::startNewLevel(const size_t level, const EGameMode eGameMode) {
-    m_currentLevelIndex = 1;
-    auto pLevel = std::make_shared<Level>(ResourceManager::getLevels()[m_currentLevelIndex], eGameMode);
+    m_currentLevelIndex = level;
+    m_enemyDestroyCount = 0;
+    m_eCurrentGameMode = eGameMode;
+    auto pLevel = std::make_shared<Level>(ResourceManager::getLevels()[m_currentLevelIndex], m_eCurrentGameMode);
     m_pCurrentGameState = pLevel;
     Physics::PhysicsEngine::setCurrentLevel(pLevel);
     updateViewport();
 }
 
-void Game::nextLevel(const EGameMode eGameMode) {
-    m_changeScreenTimer.setCallback([&]{
-        startNewLevel(++m_currentLevelIndex, eGameMode);
+void Game::nextLevel() {
+    m_changeScreenTimer.setCallback([&] {
+        startNewLevel(++m_currentLevelIndex, m_eCurrentGameMode);
 
     });
     m_changeScreenTimer.start(1000);
 }
 
 void Game::update(const double delta) {
-    if (m_changeScreenTimer.isActive()){
+    if (m_changeScreenTimer.isActive()) {
         m_changeScreenTimer.update(delta);
-    }
-    else {
+    } else {
         m_pCurrentGameState->processInput(m_keys);
         m_pCurrentGameState->update(delta);
     }
+    if (!m_changeScreenTimer.isActive() and m_enemyDestroyCount == 20) {
+        nextLevel();
+    }
+}
+
+unsigned int Game::getDestroyTankCount() {
+    return m_enemyDestroyCount;
 }
 
 void Game::setKey(const int key, const int action) { m_keys[key] = action; }
 
-void Game::setStartScreen() {
-    m_changeScreenTimer.setCallback([&]{
+void Game::getStartScreen() {
+    m_pLoseSprite = ResourceManager::getSprite("GAMEOVER");
+
+    m_losePosition = glm::vec2(60, 20);
+    m_changeScreenTimer.setCallback([&] {
         m_pCurrentGameState = std::make_shared<StartScreen>(ResourceManager::getStartScreen());
         m_eCurrentGameState = EGameState::StartScreen;
         m_currentLevelIndex = 0;
     });
+
     m_changeScreenTimer.start(1000);
     setWindowSize(m_windowSize);
 }
@@ -115,6 +138,7 @@ bool Game::init() {
         std::cerr << "Can't find shader program: " << "spriteShader" << std::endl;
         return false;
     }
+
     m_pSpriteShaderProgram->use();
     m_pSpriteShaderProgram->setInt("tex", 0);
 
@@ -134,3 +158,23 @@ unsigned int Game::getCurrentWidth() {
 unsigned int Game::getCurrentHeight() {
     return m_pCurrentGameState->getStateHeight();
 }
+
+void Game::setSecondPlayerTank(const Tank::ETankType &type2) {
+    m_secondPlayerTankType = type2;
+}
+
+void Game::setFirstPlayerTank(const Tank::ETankType &type1) {
+    m_firstsPlayerTankType = type1;
+}
+
+void Game::increaseDestroyTank() {
+    ++m_enemyDestroyCount;
+}
+
+std::vector<Tank::ETankType> Game::getPlayerTankType() {
+    m_playerTankType.clear();
+    m_playerTankType.emplace_back(m_firstsPlayerTankType);
+    m_playerTankType.emplace_back(m_secondPlayerTankType);
+    return m_playerTankType;
+}
+

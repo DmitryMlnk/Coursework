@@ -1,5 +1,6 @@
 #include "Level.h"
 
+#include "../GameObjects/Progressbar.h"
 #include "../GameObjects/BetonWall.h"
 #include "../GameObjects/Border.h"
 #include "../GameObjects/BrickWall.h"
@@ -162,27 +163,35 @@ Level::Level(const std::vector<std::string> &levelDescription,
             glm::vec2(BLOCK_SIZE, (m_heightBlocks + 1) * BLOCK_SIZE), 0.f, 0.f));
 
     // right border
-    m_levelObjects.emplace_back(std::make_shared<Border>(
+    m_levelObjects.emplace_back(std::make_shared<ProgressBar>(
             glm::vec2((m_widthBlocks + 1) * BLOCK_SIZE, 0.f),
-            glm::vec2(BLOCK_SIZE * 2.f, (m_heightBlocks + 1) * BLOCK_SIZE), 0.f,
-            0.f));
+            glm::vec2(32.f, 240), 0.f, 0.f,
+            m_eGameMode));
 }
 
 void Level::initLevel() {
+    m_playerType.clear();
+    m_playerType = Game::getPlayerTankType();
+    if (m_playerType.empty()) {
+        std::cout << "empty player type :(" << std::endl;
+   }
+
     switch (m_eGameMode) {
         case Game::EGameMode::TwoPlayers:
             m_pTank2 = std::make_shared<Tank>(
-                    Tank::ETankType::Player2Green_type4, false, true,
+                    m_playerType.at(1), false, true,
                     Tank::EOrientation::Top, 0.05, getPlayerRespawn_2(),
                     glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f);
             Physics::PhysicsEngine::addDynamicGameObject(m_pTank2);
+            std::cout << "add second player" << std::endl;
             [[fallthrough]];
         case Game::EGameMode::OnePlayer:
             m_pTank1 = std::make_shared<Tank>(
-                    Tank::ETankType::EnemyRed_type2, false, true,
+                    m_playerType.at(0), false, true,
                     Tank::EOrientation::Top, 0.05, getPlayerRespawn_1(),
                     glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f);
             Physics::PhysicsEngine::addDynamicGameObject(m_pTank1);
+            std::cout << "add first player" << std::endl;
     }
 
     for (const auto currentEaglePos : m_eagleRespawn){
@@ -190,15 +199,15 @@ void Level::initLevel() {
     }
 
     m_enemyTanks.emplace(std::make_shared<Tank>(
-            Tank::ETankType::EnemyRed_type4, true, true,
+            Tank::ETankType::EnemyWhite_type1, true, true,
             Tank::EOrientation::Bottom, 0.05, getEnemyRespawn_1(),
             glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
     m_enemyTanks.emplace(std::make_shared<Tank>(
-            Tank::ETankType::EnemyRed_type4, true, true,
+            Tank::ETankType::EnemyWhite_type1, true, true,
             Tank::EOrientation::Bottom, 0.05, getEnemyRespawn_2(),
             glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
     m_enemyTanks.emplace(std::make_shared<Tank>(
-            Tank::ETankType::EnemyRed_type2, true, true,
+            Tank::ETankType::EnemyWhite_type2, true, true,
             Tank::EOrientation::Bottom, 0.05, getEnemyRespawn_3(),
             glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
     for (const auto &currentTank: m_enemyTanks) {
@@ -251,25 +260,21 @@ void Level::update(const double delta) {
 
     for (const auto &currentTank: m_enemyTanks) {
         currentTank->update(delta);
-        if (!currentTank->isActive()){
-            currentTank->reborn();
-            currentTank->update(delta);
-        }
     }
     for (const auto &currentEagle: m_eagle) {
         currentEagle->update(delta);
         if (!currentEagle->isActive()) {
             std::cout << "Lvl lose" << std::endl;
-            Game::setStartScreen();
+            Game::getStartScreen();
             break;
         }
     }
     if (m_eGameMode == Game::EGameMode::OnePlayer and !m_pTank1->isActive()){
         std::cout << "Lvl lose" << std::endl;
-        Game::setStartScreen();
+        Game::getStartScreen();
     } else if (m_eGameMode == Game::EGameMode::TwoPlayers and !m_pTank1->isActive() and !m_pTank2->isActive()){
         std::cout << "Lvl lose" << std::endl;
-        Game::setStartScreen();
+        Game::getStartScreen();
     }
 }
 

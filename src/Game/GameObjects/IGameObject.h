@@ -16,6 +16,7 @@ public:
         Tank,
         Trees,
         Water,
+        ProgressBar,
 
         Unknown
     };
@@ -30,7 +31,7 @@ public:
 
     [[nodiscard]] IGameObject *getOwner() const { return m_pOwner; }
 
-    virtual void render() const = 0;
+    virtual void render() = 0;
 
     virtual void update(const double delta) {};
 

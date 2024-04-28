@@ -3,7 +3,9 @@
 #include <array>
 #include <glm/vec2.hpp>
 #include <memory>
+#include "../Renderer/SpriteAnimator.h"
 #include "../Renderer/Timer.h"
+#include "./GameObjects/Tank.h"
 
 class IGameState;
 
@@ -36,11 +38,21 @@ public:
 
     static void startNewLevel(const size_t level, const EGameMode eGameMode);
 
-    static void nextLevel(const EGameMode eGameMode);
+    static void nextLevel();
 
     static void updateViewport();
 
-    static void setStartScreen();
+    static unsigned int getDestroyTankCount();
+
+    static void increaseDestroyTank();
+
+    static void setSecondPlayerTank(const Tank::ETankType &type2);
+
+    static void setFirstPlayerTank(const Tank::ETankType &type1);
+
+    static std::vector<Tank::ETankType> getPlayerTankType();
+
+    static void getStartScreen();
 
     static void setWindowSize(glm::uvec2 &windowSize);
 
@@ -55,10 +67,18 @@ private:
     };
 
     static std::array<bool, 349> m_keys;
+    static unsigned int m_enemyDestroyCount;
 
     static glm::uvec2 m_windowSize;
+    static glm::vec2 m_losePosition;
     static EGameState m_eCurrentGameState;
+    static EGameMode m_eCurrentGameMode;
 
+    static Tank::ETankType m_firstsPlayerTankType;
+    static Tank::ETankType m_secondPlayerTankType;
+    static std::vector<Tank::ETankType> m_playerTankType;
+
+    static std::shared_ptr<RenderEngine::Sprite> m_pLoseSprite;
     static Timer m_changeScreenTimer;
     static std::shared_ptr<IGameState> m_pCurrentGameState;
     static std::shared_ptr<RenderEngine::ShaderProgram> m_pSpriteShaderProgram;

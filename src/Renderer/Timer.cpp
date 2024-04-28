@@ -7,7 +7,7 @@ Timer::Timer()
 
 }
 
-bool Timer::isActive() { return m_isRunning; }
+bool Timer::isActive() const{ return m_isRunning; }
 
 void Timer::update(const double delta)
 {

@@ -20,7 +20,7 @@ void Water::renderBlock(const EBlockLocation eBlockLocation) const
     m_sprite->render(m_position + m_blockOffsets[static_cast<size_t>(eBlockLocation)], m_size / 2.f, m_rotation, m_layer, m_spriteAnimator.getCurrentFrame());
 }
 
-void Water::render() const
+void Water::render()
 {
     renderBlock(EBlockLocation::TopLeft);
     renderBlock(EBlockLocation::TopRight);

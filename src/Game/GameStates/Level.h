@@ -59,6 +59,7 @@ private:
     glm::ivec2 m_enemyRespawn_2;
     glm::ivec2 m_enemyRespawn_3;
     std::vector<glm::ivec2> m_eagleRespawn;
+    std::vector<Tank::ETankType> m_playerType;
     std::vector<std::shared_ptr<IGameObject>> m_levelObjects;
     std::shared_ptr<Tank> m_pTank1;
     std::shared_ptr<Tank> m_pTank2;

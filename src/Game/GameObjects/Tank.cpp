@@ -2,6 +2,7 @@
 
 #include "../../Physics/PhysicsEngine.h"
 #include "../../Renderer/Sprite.h"
+#include "../Game.h"
 #include "../../Resources/ResourceManager.h"
 #include "Bullet.h"
 #include "iostream"
@@ -32,6 +33,8 @@ Tank::Tank(const Tank::ETankType eType, const bool bHasAI,
           m_spriteBigExplosionBottomRight(m_pBigExplosionBottomRight),
           m_spriteBigExplosionTopLeft(m_pBigExplosionTopLeft),
           m_spriteBigExplosionTopRight(m_pBigExplosionTopRight),
+          m_pLowExplosion(ResourceManager::getSprite("explosion")),
+          m_spriteLowExplosion(m_pLowExplosion),
           m_pSprite_top(ResourceManager::getSprite(getTankSpriteFromType(eType) + "_top")),
           m_pSprite_bottom(ResourceManager::getSprite(getTankSpriteFromType(eType) + "_bottom")),
           m_pSprite_left(ResourceManager::getSprite(getTankSpriteFromType(eType) + "_left")),
@@ -46,6 +49,7 @@ Tank::Tank(const Tank::ETankType eType, const bool bHasAI,
           m_spriteAnimator_shield(m_pSprite_shield), m_maxVelocity(maxVelocity),
           m_isSpawning(true),
           m_hasShield(false),
+          m_isExplosion(false),
           m_eTankType(eType),
           m_bShieldOnSpawn(bShieldOnSpawn),
           m_starPosition(position),
@@ -64,19 +68,20 @@ Tank::Tank(const Tank::ETankType eType, const bool bHasAI,
 
     auto onCollisionCallback = [&](const IGameObject &object, const Physics::ECollisionDirection) {
         setVelocity(0);
-        m_isExplosion = true;
-        m_explosionTimer.start(m_spriteBigExplosionTopRight.getTotalDuration());
     };
     m_colliders.emplace_back(glm::vec2(0), m_size, onCollisionCallback);
 
-    m_explosionTimer.setCallback([&]() {
-        m_maxVelocity = 0;
+    m_lowExplosionTimer.setCallback([&]() {
         m_isExplosion = false;
         m_isActive = false;
+        reborn();
+    });
+    m_explosionTimer.setCallback([&]() {
         m_spriteBigExplosionTopRight.reset();
         m_spriteBigExplosionTopLeft.reset();
         m_spriteBigExplosionBottomRight.reset();
         m_spriteBigExplosionBottomLeft.reset();
+        m_lowExplosionTimer.start(m_spriteLowExplosion.getTotalDuration());
     });
 
     updateTankLogic();
@@ -105,8 +110,8 @@ void Tank::setVelocity(const double velocity) {
     }
 }
 
-void Tank::render() const {
-    if (m_isActive) {
+void Tank::render()  {
+    if (!m_isExplosion) {
         if (m_isSpawning) {
             m_pSprite_respawn->render(m_position, m_size, m_rotation, m_layer,
                                       m_spriteAnimator_respawn.getCurrentFrame());
@@ -135,7 +140,11 @@ void Tank::render() const {
                                          m_spriteAnimator_shield.getCurrentFrame());
             }
         }
-    } else if (m_isExplosion) {
+    } else if (!m_explosionTimer.isActive()) {
+        std::cout << "low explosion " << std::endl;
+        m_pLowExplosion->render(m_position, m_size, m_rotation, m_layer + 0.2f,
+                                m_spriteLowExplosion.getCurrentFrame());
+    } else {
         m_pBigExplosionTopRight->render(m_position + glm::vec2(8, 8), m_size, m_rotation, m_layer + 0.1f,
                                         m_spriteBigExplosionTopRight.getCurrentFrame());
         m_pBigExplosionTopLeft->render(m_position + glm::vec2(-8, 8), m_size, m_rotation, m_layer + 0.1f,
@@ -144,6 +153,7 @@ void Tank::render() const {
                                            m_spriteBigExplosionBottomRight.getCurrentFrame());
         m_pBigExplosionBottomLeft->render(m_position + glm::vec2(-8, -8), m_size, m_rotation, m_layer + 0.1f,
                                           m_spriteBigExplosionBottomLeft.getCurrentFrame());
+
     }
 
     m_pCurrentBullet->render();
@@ -175,39 +185,44 @@ void Tank::setOrientation(const EOrientation eOrientation) {
 void Tank::update(const double delta) {
     m_pCurrentBullet->update(delta);
 
-    if (m_isSpawning) {
-        m_velocity = 0;
-        m_spriteAnimator_respawn.update(delta);
-        m_respawnTimer.update(delta);
-    } else if (m_isActive) {
-        if (m_pAIComponent) {
-            m_velocity = m_maxVelocity;
-            m_pAIComponent->update(delta);
-        }
+    if (!m_isExplosion) {
+        if (m_isSpawning) {
+            m_velocity = 0;
+            m_spriteAnimator_respawn.update(delta);
+            m_respawnTimer.update(delta);
+        } else if (m_isActive) {
+            if (m_pAIComponent) {
+                m_velocity = m_maxVelocity;
+                m_pAIComponent->update(delta);
+            }
 
-        if (m_hasShield) {
-            m_spriteAnimator_shield.update(delta);
-            m_shieldTimer.update(delta);
-        }
+            if (m_hasShield) {
+                m_spriteAnimator_shield.update(delta);
+                m_shieldTimer.update(delta);
+            }
 
-        if (m_velocity > 0) {
-            switch (m_eOrientation) {
-                case Tank::EOrientation::Top:
-                    m_spriteAnimator_top.update(delta);
-                    break;
-                case Tank::EOrientation::Bottom:
-                    m_spriteAnimator_bottom.update(delta);
-                    break;
-                case Tank::EOrientation::Left:
-                    m_spriteAnimator_left.update(delta);
-                    break;
-                case Tank::EOrientation::Right:
-                    m_spriteAnimator_right.update(delta);
-                    break;
+            if (m_velocity > 0) {
+                switch (m_eOrientation) {
+                    case Tank::EOrientation::Top:
+                        m_spriteAnimator_top.update(delta);
+                        break;
+                    case Tank::EOrientation::Bottom:
+                        m_spriteAnimator_bottom.update(delta);
+                        break;
+                    case Tank::EOrientation::Left:
+                        m_spriteAnimator_left.update(delta);
+                        break;
+                    case Tank::EOrientation::Right:
+                        m_spriteAnimator_right.update(delta);
+                        break;
+                }
             }
         }
-    } else if (m_isExplosion) {
+    } else {
         m_explosionTimer.update(delta);
+        if (!m_explosionTimer.isActive()) {
+            m_lowExplosionTimer.update(delta);
+        }
     }
 }
 
@@ -422,4 +437,5 @@ void Tank::reborn() {
     updateTankLogic();
     loadTankType();
     render();
+    Game::increaseDestroyTank();
 }

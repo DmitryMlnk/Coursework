@@ -25,7 +25,7 @@ public:
            const glm::vec2& size,
            const glm::vec2& explosionSize,
            const float layer);
-    virtual void render() const override;
+    virtual void render()  override;
     void update(const double delta) override;
     void explosion() override;
     bool isActive() const { return m_isActive; }

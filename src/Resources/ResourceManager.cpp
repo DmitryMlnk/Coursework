@@ -87,8 +87,7 @@ std::shared_ptr<RenderEngine::ShaderProgram> ResourceManager::getShaderProgram(c
 }
 
 
-std::shared_ptr<RenderEngine::Texture2D>
-ResourceManager::loadTexture(const std::string &textureName, const std::string &texturePath) {
+std::shared_ptr<RenderEngine::Texture2D> ResourceManager::loadTexture(const std::string &textureName, const std::string &texturePath) {
     int channels = 0;
     int width = 0;
     int height = 0;

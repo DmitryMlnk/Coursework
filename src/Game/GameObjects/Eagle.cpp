@@ -16,7 +16,7 @@ Eagle::Eagle(const glm::vec2& position, const glm::vec2& size, const float rotat
     m_colliders.emplace_back(glm::vec2(0), m_size);
 }
 
-void Eagle::render() const
+void Eagle::render()
 {
     m_sprite[static_cast<size_t>(m_eCurrentState)]->render(m_position, m_size, m_rotation, m_layer);
 }

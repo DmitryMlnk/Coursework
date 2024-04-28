@@ -5,7 +5,7 @@
 class Timer {
 public:
     Timer();
-    bool isActive();
+    bool isActive() const;
     void update(const double delta);
     void start(const double duration);
     void setCallback(std::function<void()> callback);

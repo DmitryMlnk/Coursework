@@ -35,7 +35,7 @@ Bullet::Bullet(const double velocity, const glm::vec2 &position,
     });
 }
 
-void Bullet::render() const {
+void Bullet::render()  {
     if (m_isExplosion) {
         switch (m_eOrientation) {
             case EOrientation::Top:
@@ -104,7 +104,6 @@ void Bullet::fire(const glm::vec2 &position, const glm::vec2 &direction) {
 
 void Bullet::explosion() {
     m_isExplosion = true;
-    m_isActive = false;
     m_velocity = 0;
     m_explosionTimer.start(m_spriteAnimator_explosion.getTotalDuration());
     m_objectType = IGameObject::EObjectType::Unknown;

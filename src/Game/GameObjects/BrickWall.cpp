@@ -281,7 +281,7 @@ void BrickWall::renderBrick(const EBrickLocation eBrickLocation) const
     }
 }
 
-void BrickWall::render() const
+void BrickWall::render()
 {
     renderBrick(EBrickLocation::TopLeft);
     renderBrick(EBrickLocation::TopRight);

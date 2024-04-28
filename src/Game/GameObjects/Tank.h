@@ -80,7 +80,7 @@ public:
          const double maxVelocity, const glm::vec2 &position,
          const glm::vec2 &size, const float layer);
 
-    void render() const override;
+    void render()  override;
 
     void setOrientation(const EOrientation eOrientation);
 
@@ -121,7 +121,9 @@ private:
     std::shared_ptr<RenderEngine::Sprite> m_pBigExplosionBottomRight;
     std::shared_ptr<RenderEngine::Sprite> m_pBigExplosionTopLeft;
     std::shared_ptr<RenderEngine::Sprite> m_pBigExplosionTopRight;
+    std::shared_ptr<RenderEngine::Sprite> m_pLowExplosion;
 
+    RenderEngine::SpriteAnimator m_spriteLowExplosion;
     RenderEngine::SpriteAnimator m_spriteBigExplosionBottomLeft;
     RenderEngine::SpriteAnimator m_spriteBigExplosionBottomRight;
     RenderEngine::SpriteAnimator m_spriteBigExplosionTopLeft;
@@ -137,6 +139,7 @@ private:
     Timer m_respawnTimer;
     Timer m_shieldTimer;
     Timer m_explosionTimer;
+    Timer m_lowExplosionTimer;
 
     double m_maxVelocity;
     bool m_isExplosion;
