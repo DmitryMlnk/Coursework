@@ -7,6 +7,8 @@
 #include <vector>
 
 #include "../Game.h"
+#include "../../Renderer/Sprite.h"
+#include "../../Resources/ResourceManager.h"
 #include "../GameObjects/Eagle.h"
 #include "IGameState.h"
 
@@ -52,6 +54,10 @@ private:
     size_t m_heightBlocks = 0;
     unsigned int m_widthPixels = 0;
     unsigned int m_heightPixels = 0;
+
+    bool m_isPause = false;
+    bool m_keyReleased;
+    std::shared_ptr<RenderEngine::Sprite> m_pPauseSprite;
 
     glm::ivec2 m_playerRespawn_1;
     glm::ivec2 m_playerRespawn_2;

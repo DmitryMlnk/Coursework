@@ -19,20 +19,25 @@
 #include <iostream>
 
 
+unsigned int Game::m_enemyDestroyCount;
 std::array<bool, 349> Game::m_keys;
+bool Game::m_changeNewLvl;
 glm::uvec2 Game::m_windowSize;
 glm::vec2 Game::m_losePosition;
 Game::EGameMode Game::m_eCurrentGameMode;
 Game::EGameState Game::m_eCurrentGameState;
-unsigned int Game::m_enemyDestroyCount;
 std::shared_ptr<IGameState> Game::m_pCurrentGameState;
+std::shared_ptr<RenderEngine::Sprite> Game::m_greyBackground;
+std::shared_ptr<RenderEngine::Sprite> Game::m_stageSprite;
 std::shared_ptr<RenderEngine::Sprite> Game::m_pLoseSprite;
-std::vector<Tank::ETankType> Game::m_playerTankType;
 std::shared_ptr<RenderEngine::ShaderProgram> Game::m_pSpriteShaderProgram;
+std::vector<std::shared_ptr<RenderEngine::Sprite>> Game::m_pDigitsSprite;
+std::vector<Tank::ETankType> Game::m_playerTankType;
 Tank::ETankType Game::m_firstsPlayerTankType;
 Tank::ETankType Game::m_secondPlayerTankType;
 size_t Game::m_currentLevelIndex;
 Timer Game::m_changeScreenTimer;
+Timer Game::m_changeNewScreenTimer;
 
 void Game::initStartScreen(glm::uvec2 &windowSize) {
     m_windowSize = windowSize;
@@ -49,8 +54,12 @@ Game::~Game() {}
 
 void Game::render() {
     m_pCurrentGameState->render();
-    if (m_changeScreenTimer.isActive()) {
+    if (m_enemyDestroyCount < 1 and m_changeScreenTimer.isActive()) {
         m_pLoseSprite->render(glm::vec2(m_losePosition.x, ++m_losePosition.y), glm::vec2(136, 32), 0, 1.f);
+    } else if (m_changeNewLvl){
+        m_greyBackground->render(glm::vec2 (0, 0), m_windowSize, 0.f, 1.f);
+        m_stageSprite->render(glm::vec2 (43, 130), glm::vec2 (136, 32), 0.f, 1.1f);
+        m_pDigitsSprite[m_currentLevelIndex + 1]->render(glm::vec2 (179, 130), glm::vec2 (32, 32), 0.f, 1.1f);
     }
 }
 
@@ -90,22 +99,34 @@ void Game::startNewLevel(const size_t level, const EGameMode eGameMode) {
     updateViewport();
 }
 
+void Game::changeScreen() {
+    m_changeNewLvl = true;
+    m_changeNewScreenTimer.setCallback([&]{
+        m_changeNewLvl = false;
+    });
+    m_changeNewScreenTimer.start(1000);
+}
+
 void Game::nextLevel() {
     m_changeScreenTimer.setCallback([&] {
-        startNewLevel(++m_currentLevelIndex, m_eCurrentGameMode);
-
+        startNewLevel(++m_currentLevelIndex + 1, m_eCurrentGameMode);
     });
-    m_changeScreenTimer.start(1000);
+    m_changeScreenTimer.start(1700);
+    changeScreen();
 }
 
 void Game::update(const double delta) {
     if (m_changeScreenTimer.isActive()) {
+
         m_changeScreenTimer.update(delta);
     } else {
         m_pCurrentGameState->processInput(m_keys);
         m_pCurrentGameState->update(delta);
     }
-    if (!m_changeScreenTimer.isActive() and m_enemyDestroyCount == 20) {
+    if (m_changeNewScreenTimer.isActive()){
+        m_changeNewScreenTimer.update(delta);
+    }
+    if (!m_changeScreenTimer.isActive() and m_enemyDestroyCount == 2) {
         nextLevel();
     }
 }
@@ -117,8 +138,6 @@ unsigned int Game::getDestroyTankCount() {
 void Game::setKey(const int key, const int action) { m_keys[key] = action; }
 
 void Game::getStartScreen() {
-    m_pLoseSprite = ResourceManager::getSprite("GAMEOVER");
-
     m_losePosition = glm::vec2(60, 20);
     m_changeScreenTimer.setCallback([&] {
         m_pCurrentGameState = std::make_shared<StartScreen>(ResourceManager::getStartScreen());
@@ -126,7 +145,7 @@ void Game::getStartScreen() {
         m_currentLevelIndex = 0;
     });
 
-    m_changeScreenTimer.start(1000);
+    m_changeScreenTimer.start(1700);
     setWindowSize(m_windowSize);
 }
 
@@ -142,6 +161,14 @@ bool Game::init() {
     m_pSpriteShaderProgram->use();
     m_pSpriteShaderProgram->setInt("tex", 0);
 
+    m_pLoseSprite = ResourceManager::getSprite("GAMEOVER");
+    m_greyBackground = ResourceManager::getSprite("grey");
+    m_stageSprite = ResourceManager::getSprite("STAGE");
+    for (int i = 0; i < 10; ++i) {
+        m_pDigitsSprite.emplace_back(ResourceManager::getSprite(getDigitSpriteFromInt(i)));
+    }
+
+    m_losePosition = glm::vec2(60, 20);
     m_pCurrentGameState = std::make_shared<StartScreen>(ResourceManager::getStartScreen());
     m_eCurrentGameState = EGameState::StartScreen;
     m_currentLevelIndex = 0;
@@ -169,6 +196,10 @@ void Game::setFirstPlayerTank(const Tank::ETankType &type1) {
 
 void Game::increaseDestroyTank() {
     ++m_enemyDestroyCount;
+}
+
+const std::string &Game::getDigitSpriteFromInt(int i){
+    return intToSpriteString[i];
 }
 
 std::vector<Tank::ETankType> Game::getPlayerTankType() {

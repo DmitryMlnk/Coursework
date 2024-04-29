@@ -223,11 +223,13 @@ void StartScreen::processInput(const std::array<bool, 349> &keys) {
         switch (m_currentMenuSelection) {
             case 0:
                 Game::setFirstPlayerTank(m_firstTankType);
+                Game::changeScreen();
                 Game::startNewLevel(0, Game::EGameMode::OnePlayer);
                 break;
             case 1:
                 Game::setFirstPlayerTank(m_firstTankType);
                 Game::setSecondPlayerTank(m_secondTankType);
+                Game::changeScreen();
                 Game::startNewLevel(0, Game::EGameMode::TwoPlayers);
                 break;
             default:

@@ -20,6 +20,7 @@ public:
     };
 
     Game();
+
     ~Game();
 
     static void render();
@@ -54,6 +55,8 @@ public:
 
     static void getStartScreen();
 
+    static void changeScreen();
+
     static void setWindowSize(glm::uvec2 &windowSize);
 
 private:
@@ -67,6 +70,8 @@ private:
     };
 
     static std::array<bool, 349> m_keys;
+    static bool m_changeNewLvl;
+
     static unsigned int m_enemyDestroyCount;
 
     static glm::uvec2 m_windowSize;
@@ -74,13 +79,28 @@ private:
     static EGameState m_eCurrentGameState;
     static EGameMode m_eCurrentGameMode;
 
+    static Timer m_changeScreenTimer;
+    static Timer m_changeNewScreenTimer;
+
     static Tank::ETankType m_firstsPlayerTankType;
     static Tank::ETankType m_secondPlayerTankType;
     static std::vector<Tank::ETankType> m_playerTankType;
 
+    static std::shared_ptr<RenderEngine::Sprite> m_greyBackground;
+    static std::shared_ptr<RenderEngine::Sprite> m_stageSprite;
+    static std::vector<std::shared_ptr<RenderEngine::Sprite>> m_pDigitsSprite;
     static std::shared_ptr<RenderEngine::Sprite> m_pLoseSprite;
-    static Timer m_changeScreenTimer;
     static std::shared_ptr<IGameState> m_pCurrentGameState;
     static std::shared_ptr<RenderEngine::ShaderProgram> m_pSpriteShaderProgram;
     static size_t m_currentLevelIndex;
+
+    inline static std::string intToSpriteString[] = {
+            "0", "1",
+            "2", "3",
+            "4", "5",
+            "6", "7",
+            "8", "9"
+    };
+
+    static const std::string &getDigitSpriteFromInt(int i);
 };

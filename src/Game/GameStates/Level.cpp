@@ -126,13 +126,14 @@ Level::Level(const std::vector<std::string> &levelDescription,
                     m_levelObjects.emplace_back(nullptr);
                     break;
                 case '2':
-                    std::cout << "Added Left brick pos: " << currentBottomOffset << " [] "<< currentLeftOffset << std::endl;
+                    std::cout << "Added Left brick pos: " << currentBottomOffset << " [] " << currentLeftOffset
+                              << std::endl;
                     m_levelObjects.emplace_back(createGameObjectFromDescription(
                             currentElement, glm::vec2(currentLeftOffset, currentBottomOffset),
                             glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
                     break;
                 case 'E':
-                    std::cout << "Added eagle pos: " << currentBottomOffset << " [] "<< currentLeftOffset << std::endl;
+                    std::cout << "Added eagle pos: " << currentBottomOffset << " [] " << currentLeftOffset << std::endl;
                     m_eagleRespawn.emplace_back(currentLeftOffset, currentBottomOffset);
                     m_levelObjects.emplace_back(nullptr);
                     break;
@@ -174,7 +175,7 @@ void Level::initLevel() {
     m_playerType = Game::getPlayerTankType();
     if (m_playerType.empty()) {
         std::cout << "empty player type :(" << std::endl;
-   }
+    }
 
     switch (m_eGameMode) {
         case Game::EGameMode::TwoPlayers:
@@ -194,8 +195,8 @@ void Level::initLevel() {
             std::cout << "add first player" << std::endl;
     }
 
-    for (const auto currentEaglePos : m_eagleRespawn){
-        m_eagle.emplace(std::make_shared<Eagle>(currentEaglePos, glm::vec2(BLOCK_SIZE, BLOCK_SIZE),0.f, 0.f));
+    for (const auto currentEaglePos: m_eagleRespawn) {
+        m_eagle.emplace(std::make_shared<Eagle>(currentEaglePos, glm::vec2(BLOCK_SIZE, BLOCK_SIZE), 0.f, 0.f));
     }
 
     m_enemyTanks.emplace(std::make_shared<Tank>(
@@ -218,6 +219,7 @@ void Level::initLevel() {
         std::cout << "Eagle added to dynamic obj" << std::endl;
     }
 
+    m_pPauseSprite = ResourceManager::getSprite("PAUSE");
 }
 
 void Level::render() const {
@@ -241,40 +243,46 @@ void Level::render() const {
     for (const auto &currentTank: m_enemyTanks) {
         currentTank->render();
     }
+
+    if (m_isPause) {
+        m_pPauseSprite->render(glm::vec2(60, 115), glm::vec2(136, 32), 0.f, 1.f);
+    }
 }
 
 void Level::update(const double delta) {
-    for (const auto &currentLevelObject: m_levelObjects) {
-        if (currentLevelObject) {
-            currentLevelObject->update(delta);
+    if (!m_isPause) {
+        for (const auto &currentLevelObject: m_levelObjects) {
+            if (currentLevelObject) {
+                currentLevelObject->update(delta);
+            }
         }
-    }
 
-    switch (m_eGameMode) {
-        case Game::EGameMode::TwoPlayers:
-            m_pTank2->update(delta);
-            [[fallthrough]];
-        case Game::EGameMode::OnePlayer:
-            m_pTank1->update(delta);
-    }
+        switch (m_eGameMode) {
+            case Game::EGameMode::TwoPlayers:
+                m_pTank2->update(delta);
+                [[fallthrough]];
+            case Game::EGameMode::OnePlayer:
+                m_pTank1->update(delta);
+        }
 
-    for (const auto &currentTank: m_enemyTanks) {
-        currentTank->update(delta);
-    }
-    for (const auto &currentEagle: m_eagle) {
-        currentEagle->update(delta);
-        if (!currentEagle->isActive()) {
+        for (const auto &currentTank: m_enemyTanks) {
+            currentTank->update(delta);
+        }
+        for (const auto &currentEagle: m_eagle) {
+            currentEagle->update(delta);
+            if (!currentEagle->isActive()) {
+                std::cout << "Lvl lose" << std::endl;
+                Game::getStartScreen();
+                break;
+            }
+        }
+        if (m_eGameMode == Game::EGameMode::OnePlayer and !m_pTank1->isActive()) {
             std::cout << "Lvl lose" << std::endl;
             Game::getStartScreen();
-            break;
+        } else if (m_eGameMode == Game::EGameMode::TwoPlayers and !m_pTank1->isActive() and !m_pTank2->isActive()) {
+            std::cout << "Lvl lose" << std::endl;
+            Game::getStartScreen();
         }
-    }
-    if (m_eGameMode == Game::EGameMode::OnePlayer and !m_pTank1->isActive()){
-        std::cout << "Lvl lose" << std::endl;
-        Game::getStartScreen();
-    } else if (m_eGameMode == Game::EGameMode::TwoPlayers and !m_pTank1->isActive() and !m_pTank2->isActive()){
-        std::cout << "Lvl lose" << std::endl;
-        Game::getStartScreen();
     }
 }
 
@@ -321,6 +329,13 @@ void Level::processInput(const std::array<bool, 349> &keys) {
             if (m_pTank1 && keys[GLFW_KEY_SPACE]) {
                 m_pTank1->fire();
             }
+    }
+    if (keys[GLFW_KEY_ESCAPE] and m_keyReleased) {
+        m_isPause = !m_isPause;
+        m_keyReleased = false;
+        std::cout << "pause key" << std::endl;
+    } else if (!keys[GLFW_KEY_ESCAPE]) {
+        m_keyReleased = true;
     }
 }
 

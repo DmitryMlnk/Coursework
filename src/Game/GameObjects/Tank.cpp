@@ -110,7 +110,7 @@ void Tank::setVelocity(const double velocity) {
     }
 }
 
-void Tank::render()  {
+void Tank::render() {
     if (!m_isExplosion) {
         if (m_isSpawning) {
             m_pSprite_respawn->render(m_position, m_size, m_rotation, m_layer,
