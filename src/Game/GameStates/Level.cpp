@@ -200,15 +200,15 @@ void Level::initLevel() {
     }
 
     m_enemyTanks.emplace(std::make_shared<Tank>(
-            Tank::ETankType::EnemyWhite_type1, true, true,
+            Tank::ETankType::EnemyRed_type4, true, true,
             Tank::EOrientation::Bottom, 0.05, getEnemyRespawn_1(),
             glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
     m_enemyTanks.emplace(std::make_shared<Tank>(
-            Tank::ETankType::EnemyWhite_type1, true, true,
+            Tank::ETankType::EnemyRed_type4, true, true,
             Tank::EOrientation::Bottom, 0.05, getEnemyRespawn_2(),
             glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
     m_enemyTanks.emplace(std::make_shared<Tank>(
-            Tank::ETankType::EnemyWhite_type2, true, true,
+            Tank::ETankType::EnemyRed_type2, true, true,
             Tank::EOrientation::Bottom, 0.05, getEnemyRespawn_3(),
             glm::vec2(Level::BLOCK_SIZE, Level::BLOCK_SIZE), 0.f));
     for (const auto &currentTank: m_enemyTanks) {

@@ -94,6 +94,7 @@ private:
     static std::shared_ptr<RenderEngine::ShaderProgram> m_pSpriteShaderProgram;
     static size_t m_currentLevelIndex;
 
+
     inline static std::string intToSpriteString[] = {
             "0", "1",
             "2", "3",
